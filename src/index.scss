@@ -6,7 +6,7 @@
 
 html,
 body {
-  font-size: 10px
+  font-size: 10px;
 }
 
 button {
@@ -19,7 +19,6 @@ img {
   object-fit: cover;
 }
 
-
 .auth-container {
   min-height: 100vh;
   display: flex;
@@ -27,22 +26,26 @@ img {
   align-items: center;
   justify-content: center;
   background-color: #fafafa;
+
   .container {
     width: 100%;
     max-width: 68rem;
     position: relative;
     height: 42rem;
     border-radius: 10px;
-    box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.25),
-      0px 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow:
+      0 14px 28px rgba(0, 0, 0, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.22);
     display: flex;
     justify-content: space-between;
   }
-  .form-container{
+
+  .form-container {
     height: 100%;
     width: 50%;
     position: relative;
     overflow: hidden;
+
     .signup-container,
     .login-container {
       width: 100%;
@@ -50,6 +53,7 @@ img {
       position: absolute;
       top: 0;
       left: 0;
+
       form {
         height: 100%;
         display: flex;
@@ -57,72 +61,87 @@ img {
         align-items: center;
         justify-content: center;
         padding: 2rem;
+
         h1 {
           font-size: 2.5rem;
           font-weight: bold;
           margin-bottom: 2rem;
           width: 100%;
         }
+
         .switch-buttons {
           width: 100%;
           margin-bottom: 2rem;
+
           .switch-btn {
             padding: 0.8rem 1.8rem;
             background: #fff;
             border: none;
             color: #ccc;
+
             &:nth-child(1) {
               margin-right: 2rem;
             }
+
             &.active {
               border: 1px solid #000;
               color: #000;
             }
           }
         }
+
         .continue-with {
           width: 100%;
           display: flex;
           justify-content: space-between;
           margin-bottom: 2rem;
           align-items: center;
+
           button {
             width: 48%;
             padding: 0.8rem 1.8rem;
+
             &.facebook {
               background: #3b5998;
               color: #fff;
             }
           }
         }
+
         .or {
           width: 100%;
           display: flex;
           align-items: center;
           margin-bottom: 2rem;
+
           .left {
             width: 40%;
             height: 1px;
             background: #000;
           }
+
           .text {
             margin: 0 2rem;
             font-size: 2rem;
           }
+
           .right {
             width: 40%;
             height: 1px;
             background: #000;
           }
         }
+
         .field {
           width: 100%;
           margin-bottom: 2rem;
+
           .input {
             width: 100%;
             padding: 0.8rem;
           }
         }
+
         .auth-btn {
           width: 100%;
           padding: 0.8rem 1.8rem;
@@ -131,7 +150,7 @@ img {
     }
 
     .login-container {
-      transition:  transform 80ms ease-in-out;
+      transition: transform 80ms ease-in-out;
     }
 
     .signup-container {
@@ -152,6 +171,7 @@ img {
       }
     }
   }
+
   .overlay-container {
     height: 100%;
     width: 50%;
