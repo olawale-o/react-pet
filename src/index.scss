@@ -27,6 +27,7 @@ img {
   justify-content: center;
   background-color: #fafafa;
   margin-top: -5rem;
+
   .container {
     width: 100%;
     max-width: 68rem;
@@ -38,7 +39,6 @@ img {
       0 10px 10px rgba(0, 0, 0, 0.22);
     display: flex;
     justify-content: space-between;
-    position: relative;
     overflow: hidden;
   }
 
@@ -46,12 +46,14 @@ img {
     height: 100%;
     width: 50%;
     position: relative;
+
     .signup-container,
     .login-container {
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
+
       form {
         height: 100%;
         display: flex;
