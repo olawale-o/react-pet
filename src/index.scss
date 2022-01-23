@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap');
+@import './assets/styles/variables.scss';
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +10,8 @@
 html,
 body {
   font-size: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
 }
 
 button {
@@ -17,6 +22,24 @@ button {
 
 img {
   object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: $light-text-color;
+}
+
+.menu {
+  background: none;
+  font-size: 3rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.close {
+  background: none;
 }
 
 .auth-container {
