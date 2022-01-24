@@ -29,6 +29,10 @@ a {
   color: $light-text-color;
 }
 
+li {
+  list-style: none;
+}
+
 .menu {
   background: none;
   font-size: 3rem;

@@ -1,5 +1,6 @@
 import './Home.scss';
 import SideBar from '../../components/SideBar';
+import Profile from '../../components/Profile';
 
 const Home = () => {
   console.log('Home');
@@ -8,7 +9,7 @@ const Home = () => {
     <div className="home">
       <SideBar />
       <div className="home-content">
-        Dashboard
+        <Profile />
       </div>
     </div>
   );
