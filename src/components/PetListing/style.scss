@@ -1,0 +1,17 @@
+@media screen and (min-width: 768px) {
+  .listing__pet {
+    width: calc(100% - 350px);
+    margin-left: 280px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 4rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .listing__pet {
+    width: calc(100% - 250px);
+    margin-left: 300px;
+  }
+}
+
