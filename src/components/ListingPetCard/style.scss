@@ -115,3 +115,11 @@
     }
   }
 }
+
+@media screen and (min-width: 768px) {
+  .listing__dog {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
