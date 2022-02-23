@@ -1,2 +1,2 @@
-export { default as ListingPetCard } from './ListingPetCard';
-export { default as Profile } from './Profile';
+export { default as PetListing } from './PetListing';
+export { default as SideSearchPanel } from './SideSearchPanel';
