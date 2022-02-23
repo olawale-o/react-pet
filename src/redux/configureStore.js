@@ -1,10 +1,9 @@
-
 import { createStore, combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import authReducer from './auth/auth';
+import authReducer from './auth';
 import composedEnhancers from './enhancers';
-import globalReducer from './global/global';
+import globalReducer from './global';
 
 const persistConfig = {
   key: 'root',
