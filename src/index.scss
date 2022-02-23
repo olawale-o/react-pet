@@ -12,6 +12,7 @@ body {
   font-size: 10px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
+  background: linear-gradient(145deg, #a11435, #e297a9);
 }
 
 button {
@@ -31,6 +32,19 @@ a {
 
 li {
   list-style: none;
+}
+
+.mx-2 {
+  margin-right: 0.5rem;
+}
+
+.icon.rounded {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  display: grid;
+  place-items: center;
 }
 
 .menu {
