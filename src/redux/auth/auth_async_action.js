@@ -2,18 +2,14 @@
 import { setError } from '../global/global';
 import { setUser, setToken } from './auth';
 
-export const authenticate = (data, cb, push) => (
+export const authenticate = (data, service, push) => (
   async function login(dispatch) {
     try {
-      const response = await cb(data);
-      const { user, token, success } = response;
-      if (!success) {
-        dispatch(setError(response.message));
-      } else {
+      const response = await service(data);
+      const { user, token } = response;
         dispatch(setUser(user));
         dispatch(setToken(token));
         push('/dashboard');
-      }
     } catch (e) {
       dispatch(setError(e));
     }
