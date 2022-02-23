@@ -1,5 +1,6 @@
 import React from 'react';
-import { ProfileSideBar, ProfileArea } from '../../components';
+import { Outlet } from 'react-router-dom';
+import { ProfileSideBar } from '../../components';
 import './style.scss';
 
 const Profile = () => {
@@ -9,7 +10,7 @@ const Profile = () => {
       <div className="content">
         <div className="main">
           <ProfileSideBar />
-          <ProfileArea />
+          <Outlet />
         </div>
       </div>
     </div>
