@@ -1,15 +1,15 @@
+import React from 'react';
+import Listings from '../Listings';
 import './Home.scss';
-import SideBar from '../../components/SideBar';
-import Profile from '../../components/Profile';
 
 const Home = () => {
   console.log('Home');
-
   return (
     <div className="home">
-      <SideBar />
-      <div className="home-content">
-        <Profile />
+      <div className="content">
+        <div className="main">
+          <Listings />
+        </div>
       </div>
     </div>
   );
