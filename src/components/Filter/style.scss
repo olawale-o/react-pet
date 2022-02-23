@@ -1,0 +1,45 @@
+@media screen and (min-width: 768px) {
+  .filter {
+    .content {
+      display: flex;
+      justify-content: space-between;
+      max-width: 72rem;
+      margin-bottom: 1.5rem;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      .icon {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      .input {
+        width: 50%;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: calc(1rem + 20px);
+        padding-right: 1rem;
+        outline: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1.5rem;
+        letter-spacing: 3px;
+      }
+
+      .btn {
+        width: 20%;
+        padding: 0.5rem 1rem;
+        background: #fff;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1120px) {
+
+}
