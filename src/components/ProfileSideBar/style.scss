@@ -1,0 +1,53 @@
+@media screen and (min-width: 768px) {
+  .profile__sidebar {
+    display: block;
+    position: fixed;
+    top: 0;
+    width: 280px;
+    height: 100%;
+    z-index: 1;
+    padding: 0 2rem 4rem;
+    color: #eee;
+    background: #fff;
+    .container {
+      margin-top: 8rem;
+      .list {
+        .item {
+          .nav__link {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            .text {
+              padding: 1rem;
+              background: transparent;
+              border-radius: 20px;
+              transition: background 0.5s ease-in;
+              color: #000;
+              font-weight: 400;
+            }
+
+            .add {
+              width: 100%;
+              display: block;
+              text-align: center;
+              background: #a11435;
+              color: #fff;
+              transition: all 0.5s ease-in;
+            }
+
+            &:hover {
+              .text {
+                background: #eee;
+              }
+
+              .add {
+                background: #a11435;
+                opacity: 0.8;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
