@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/User/Home';
 import Auth from './pages/User/Index';
+import Profile from './pages/Profile';
 import { PublicRoute } from './components/routes';
 import { Navbar } from './components';
 
@@ -13,6 +14,7 @@ const App = () => (
       <Route path="/">
         <Route index path="/" element={(<PublicRoute><Navigate to="listings" /></PublicRoute>)} />
         <Route path="listings" element={(<PublicRoute><Home /></PublicRoute>)} />
+        <Route path="profile" element={(<PublicRoute><Profile /></PublicRoute>)} />
       </Route>
     </Routes>
   </div>
