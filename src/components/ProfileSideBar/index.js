@@ -12,12 +12,12 @@ const ProfileSideBar = () => (
           </Link>
         </li>
         <li className="item">
-          <Link to="/" className="nav__link">
+          <Link to="/profile/pets" className="nav__link">
             <span className="text">Pets</span>
           </Link>
         </li>
         <li className="item">
-          <Link to="/" className="nav__link">
+          <Link to="/profile/pets/new" className="nav__link">
             <span className="text add">Add Pet</span>
           </Link>
         </li>
