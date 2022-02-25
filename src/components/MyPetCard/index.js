@@ -3,6 +3,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import PropType from 'prop-types';
 import secondDog from '../../assets/images/dog2.jpg';
+import './style.scss';
 
 const MyPetCard = ({ pet: { name, offerCount, likeCount } }) => (
   <div className="pet__card">
