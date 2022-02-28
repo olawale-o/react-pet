@@ -34,6 +34,136 @@ li {
   list-style: none;
 }
 
+.field {
+  width: 100%;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.input[type="text"] {
+  width: 100%;
+  height: 3rem;
+  border: 1px solid $light-text-color;
+  outline: none;
+  border-radius: 5px;
+  padding: 1rem;
+  background: #fff;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: $light-text-color;
+  padding: 0.5rem;
+  letter-spacing: 4px;
+}
+
+.input[type="radio"] {
+  padding: 0.5rem;
+}
+
+.range {
+  width: 100%;
+  height: 4rem;
+  text-align: center;
+  padding: 0 4rem 0 2rem;
+}
+
+.range__value {
+  position: relative;
+  width: 100%;
+}
+
+.range__value span {
+  position: absolute;
+  top: -18px;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  transform: translateX(-50%) scale(0);
+  transform-origin: bottom;
+  line-height: 30px;
+  z-index: 2;
+  font-size: 1rem;
+  transition: transform 0.3s ease-in-out;
+  font-weight: 700;
+}
+
+.range__value span.show {
+  transform: translateX(-50%) scale(1);
+}
+
+.range__value span::after {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  border: 3px solid #fff;
+  background: #a11435;
+  z-index: -1;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.range__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  height: 100%;
+}
+
+.range__field .value {
+  position: absolute;
+  font-size: 2rem;
+  color: #000;
+}
+
+.value.left {
+  left: -22px;
+}
+
+.value.right {
+  right: -43px;
+}
+
+.range__field input {
+  -webkit-appearance: none;
+  height: 3px;
+  width: 100%;
+  background: #a11435;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+.range__field input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  background: #a11435;
+  border-radius: 50%;
+  border: 1px solid #a11435;
+  cursor: pointer;
+}
+
+.range__field input::-moz-range-progress {
+  background: #a11435;
+}
+
+.radio__label {
+  font-size:  2rem;
+  color: #000;
+  margin-right: 2rem;
+}
+
+.label {
+  display: block;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
 .mx-2 {
   margin-right: 0.5rem;
 }
