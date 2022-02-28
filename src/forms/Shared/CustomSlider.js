@@ -2,11 +2,27 @@ import React from 'react';
 import { useField } from 'formik';
 import PropType from 'prop-types';
 
-const CustomSlider = ({ el, ...props }) => {
-  const [field] = useField(props);
-  const {
-    name, onBlur, onChange, value,
-  } = field;
+const CustomSlider = ({
+  onSliderMove,
+  onBlur,
+  el,
+  ...props
+}) => {
+  const [field, meta, helpers] = useField(props);
+  const { name } = field;
+  const { value } = meta;
+  const { setValue } = helpers;
+
+  const onSliderChange = (e) => {
+    const { target: { value } } = e;
+    setValue(value);
+    onSliderMove(value);
+  };
+
+  const onSliderBlur = () => {
+    onBlur();
+  };
+
   return (
     <div className="range">
       <div className="range__value">
@@ -21,8 +37,8 @@ const CustomSlider = ({ el, ...props }) => {
           min="0"
           max="200"
           steps="1"
-          onChange={onChange}
-          onBlur={onBlur}
+          onChange={onSliderChange}
+          onBlur={onSliderBlur}
         />
         <div className="value right">200</div>
       </div>
@@ -33,4 +49,6 @@ export default CustomSlider;
 
 CustomSlider.propTypes = {
   el: PropType.shape({ current: PropType.instanceOf(Element) }).isRequired,
+  onSliderMove: PropType.func.isRequired,
+  onBlur: PropType.func.isRequired,
 };
