@@ -1,12 +1,6 @@
 @media screen and (min-width: 768px) {
   .profile__area {
-    width: auto;
-    margin-left: 280px;
-    display: flex;
-    flex-direction: column;
-    padding-top: 8rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    width: 100%;
   }
 
   .pets {
@@ -19,7 +13,7 @@
 
 @media screen and (min-width: 1200px) {
   .profile__area {
-    margin-left: 280px;
+    width: 100%;
   }
 
   .pets {

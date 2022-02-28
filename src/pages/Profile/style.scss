@@ -1,0 +1,17 @@
+@media screen and (min-width: 768px) {
+  .outlet {
+    width: auto;
+    margin-left: 280px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 8rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .outlet {
+    margin-left: 280px;
+  }
+}

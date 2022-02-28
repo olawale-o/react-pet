@@ -10,7 +10,9 @@ const Profile = () => {
       <div className="content">
         <div className="main">
           <ProfileSideBar />
-          <Outlet />
+          <div className="outlet">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>
