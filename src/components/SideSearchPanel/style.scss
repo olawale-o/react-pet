@@ -89,6 +89,65 @@
           }
         }
       }
+
+      .search__input {
+        width: 100%;
+        background: #fff;
+        border-radius: 5px;
+        
+        input {
+          height: 55px;
+          width: 100%;
+          border-radius: 5px;
+          outline: none;
+          border: none;
+          padding: 0 2rem 0 1rem;
+          font-size: 1.5rem;
+          box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .match__box {
+          padding: 0;
+          max-height: 280px;
+          overflow-y: auto;
+          opacity: 0;
+          pointer-events: none;
+
+          li {
+            border-radius: 3px;
+            padding: 0.8rem 1.2rem;
+            cursor: default;
+            width: 100%;
+            background: #fff;
+            display: none;
+            button {
+              display: block;
+              text-align: left;
+              background: none;
+              border: none;
+              outline: none;
+              color: #000;
+              width: 100%;
+            }
+
+            &:hover {
+              background: gray;
+            }
+          }
+        }
+
+        &.active {
+          .match__box {
+            padding: 1rem 0.8rem;
+            opacity: 1;
+            pointer-events: auto;
+            
+            li {
+              display: block;
+            }
+          }
+        }
+      }
     }
   }
 }

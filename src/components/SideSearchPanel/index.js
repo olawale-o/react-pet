@@ -1,8 +1,33 @@
 import React from 'react';
 import './style.scss';
+import petColors from '../../constants/pet_colors';
 
 const SideSearchPanel = () => {
-  console.log('SideSearchPanel');
+  const [pawColors, setPawColors] = React.useState(petColors);
+  const [pawColor, setPawColor] = React.useState('');
+  const searchInputRef = React.useRef();
+
+  const colors = pawColors.map((color) => (
+    <li key={color}><button type="submit" onClick={() => console.log(color)}>{color}</button></li>
+  ));
+
+  const onSearchInputActive = () => {
+    searchInputRef.current.classList.add('active');
+  };
+
+  const onSearch = (value) => {
+    setPawColor(value);
+    if (value.trim() === '') {
+      setPawColors(petColors);
+    } else {
+      const filterColors = petColors.filter((color) => color.startsWith(value.toLowerCase()));
+      if (filterColors.length > 0) {
+        setPawColors(filterColors);
+      } else {
+        setPawColors([value]);
+      }
+    }
+  };
 
   return (
     <div className="search__panel">
@@ -35,11 +60,20 @@ const SideSearchPanel = () => {
         </div>
         <div className="panel__card">
           <h6 className="title">Color</h6>
-          <select name="color">
-            <option value="any">Any</option>
-            <option value="black">Black</option>
-            <option value="white">White</option>
-          </select>
+          <div ref={searchInputRef} className="search__input">
+            <input
+              type="text"
+              name="color"
+              placeholder="Color"
+              onFocus={onSearchInputActive}
+              onChange={(e) => onSearch(e.target.value)}
+              onBlur={() => searchInputRef.current.classList.remove('active')}
+              value={pawColor}
+            />
+            <ul className="match__box">
+              {colors}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
