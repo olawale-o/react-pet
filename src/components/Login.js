@@ -53,7 +53,7 @@ const Login = ({ onActive, isFocus, onLogin }) => {
               <span className="right" />
             </div>
             <div className="field">
-              <CustomInput type="text" name={email.name} placeholder="Email" />
+              <CustomInput type="email" name={email.name} placeholder="Email" />
             </div>
             <div className="field">
               <CustomInput type="password" name={password.name} placeholder="Password" />

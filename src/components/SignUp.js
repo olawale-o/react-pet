@@ -56,7 +56,7 @@ const SignUp = ({ onActive, isFocus, onRegister }) => {
               <CustomInput type="text" name={username.name} placeholder="Username" />
             </div>
             <div className="field">
-              <CustomInput type="text" name={registerEmail.name} placeholder="Email" />
+              <CustomInput type="email" name={registerEmail.name} placeholder="Email" />
             </div>
             <div className="field">
               <CustomInput type="password" name={registerPassword.name} placeholder="Password" />
