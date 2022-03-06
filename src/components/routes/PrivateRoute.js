@@ -6,7 +6,7 @@ import authSelector from '../../redux/auth/auth_selector';
 
 const PrivateRoute = ({ children }) => {
   const { user } = useSelector(authSelector);
-  return user ? children : <Navigate to="/" />;
+  return user ? children : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;
