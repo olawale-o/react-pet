@@ -13,7 +13,7 @@ const App = () => (
   <div className="App">
     <Navbar />
     <Routes>
-      <Route path="/" element={<Auth />} />
+      <Route path="/login" element={<Auth />} />
       <Route path="/">
         <Route index path="/" element={(<PublicRoute><Navigate to="listings" /></PublicRoute>)} />
         <Route path="listings" element={(<PublicRoute><Home /></PublicRoute>)} />
