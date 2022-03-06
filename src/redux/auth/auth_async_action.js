@@ -1,17 +1,15 @@
-
-import { setError } from '../global/global';
-import { setUser, setToken } from './auth';
+import { setError } from '../global';
+import { setUser, setToken } from '.';
 
 export const authenticate = (data, service, push) => (
   async function login(dispatch) {
     try {
-      const response = await service(data);
-      const { user, token } = response;
-        dispatch(setUser(user));
-        dispatch(setToken(token));
-        push('/dashboard');
+      const { token, user } = await service(data);
+      dispatch(setUser(user));
+      dispatch(setToken(token));
+      push('/profile');
     } catch (e) {
-      dispatch(setError(e));
+      dispatch(setError(e.response.data.error));
     }
   }
 );
