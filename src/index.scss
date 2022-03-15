@@ -40,6 +40,11 @@ li {
   text-align: left;
 }
 
+.radio__group {
+  display: flex;
+  width: 100%;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
