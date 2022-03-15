@@ -13,7 +13,7 @@ const {
 export default () => Yup.object().shape({
   [petName.name]: Yup.string().required(petName.error.required).label(petName.name),
   [petColor.name]: Yup.string().required(petColor.error.required).label(petColor.name),
-  [petGender.name]: Yup.string().oneOf(['1', '2']).required(petGender.error.required).label(petGender.name),
+  [petGender.name]: Yup.string().oneOf(['m', 'f']).required(petGender.error.required).label(petGender.name),
   [petWeight.name]: Yup.number()
     .min(20, 'Too low')
     .max(200, 'Too high')
