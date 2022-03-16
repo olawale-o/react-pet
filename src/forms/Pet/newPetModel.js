@@ -25,5 +25,17 @@ export default {
         required: 'Pet weight is required',
       },
     },
+    petDescription: {
+      name: 'petDescription',
+      error: {
+        required: 'Pet description is required',
+      },
+    },
+    petBreed: {
+      name: 'petBreed',
+      error: {
+        required: 'Pet breed is required',
+      },
+    },
   },
 };

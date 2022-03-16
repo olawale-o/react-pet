@@ -7,6 +7,8 @@ const {
     petColor,
     petGender,
     petWeight,
+    petDescription,
+    petBreed,
   },
 } = newPetModel;
 
@@ -19,4 +21,6 @@ export default () => Yup.object().shape({
     .max(200, 'Too high')
     .required(petWeight.error.required)
     .label(petWeight.name),
+  [petDescription.name]: Yup.string().required(petDescription.error.required).label(petDescription.name),
+  [petBreed.name]: Yup.string().required(petBreed.error.required).label(petBreed.name),
 });

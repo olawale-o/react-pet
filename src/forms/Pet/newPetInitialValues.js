@@ -6,6 +6,8 @@ const {
     petColor,
     petGender,
     petWeight,
+    petDescription,
+    petBreed,
   },
 } = newPetModel;
 
@@ -14,4 +16,6 @@ export default {
   [petColor.name]: '',
   [petGender.name]: '',
   [petWeight.name]: 10,
+  [petDescription.name]: '',
+  [petBreed.name]: '',
 };
