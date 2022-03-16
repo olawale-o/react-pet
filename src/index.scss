@@ -40,6 +40,12 @@ li {
   text-align: left;
 }
 
+.field__error {
+  color: red;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
 .radio__group {
   display: flex;
   width: 100%;
