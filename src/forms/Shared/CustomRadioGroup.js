@@ -23,7 +23,7 @@ const CustomRadioGroup = ({ fields, ...props }) => {
           ))
         }
       </div>
-      {touched && error && (<div className="field-error">{ meta.error }</div>)}
+      <div className="field__error">{touched && error && error}</div>
     </>
   );
 };

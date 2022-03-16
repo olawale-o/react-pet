@@ -21,13 +21,7 @@ const CustomInput = ({
         value={value}
         required
       />
-      {
-        meta.touched && meta.error && (
-          <div className="field-error">
-            { meta.error }
-          </div>
-        )
-      }
+      <div className="field__error">{meta.touched && meta.error && meta.error}</div>
     </>
   );
 };

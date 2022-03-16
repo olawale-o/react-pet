@@ -19,13 +19,7 @@ const CustomTextArea = ({ placeholder, ...props }) => {
         required
         rows="10"
       />
-      {
-        meta.touched && meta.error && (
-          <div className="field-error">
-            { meta.error }
-          </div>
-        )
-      }
+      <div className="field__error">{meta.touched && meta.error && meta.error}</div>
     </>
   );
 };
@@ -36,6 +30,5 @@ CustomTextArea.defaultProps = {
 };
 
 CustomTextArea.propTypes = {
-  type: PropType.string.isRequired,
   placeholder: PropType.string,
 };

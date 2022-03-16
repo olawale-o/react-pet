@@ -10,7 +10,7 @@ const CustomSlider = ({
 }) => {
   const [field, meta, helpers] = useField(props);
   const { name } = field;
-  const { value } = meta;
+  const { value, error, touched } = meta;
   const { setValue } = helpers;
 
   const onSliderChange = (e) => {
@@ -24,25 +24,28 @@ const CustomSlider = ({
   };
 
   return (
-    <div className="range">
-      <div className="range__value">
-        <span ref={el}>{value}</span>
+    <>
+      <div className="range">
+        <div className="range__value">
+          <span ref={el}>{value}</span>
+        </div>
+        <div className="range__field">
+          <div className="value left">0</div>
+          <input
+            type="range"
+            name={name}
+            value={value}
+            min="0"
+            max="200"
+            steps="1"
+            onChange={onSliderChange}
+            onBlur={onSliderBlur}
+          />
+          <div className="value right">200</div>
+        </div>
       </div>
-      <div className="range__field">
-        <div className="value left">0</div>
-        <input
-          type="range"
-          name={name}
-          value={value}
-          min="0"
-          max="200"
-          steps="1"
-          onChange={onSliderChange}
-          onBlur={onSliderBlur}
-        />
-        <div className="value right">200</div>
-      </div>
-    </div>
+      <div className="field__error">{touched && error && error}</div>
+    </>
   );
 };
 export default CustomSlider;
