@@ -3,6 +3,7 @@ export { authModel, authSchema, authInitialValues } from './Auth';
 export {
   CustomInput,
   CustomSlider,
-  CustomRadioInput,
+  CustomRadioGroup,
   CustomTextArea,
+  CustomAutoSuggest,
 } from './Shared';
