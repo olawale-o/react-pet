@@ -19,6 +19,7 @@ const CustomInput = ({
         onBlur={onBlur}
         onChange={onChange}
         value={value}
+        autoComplete="off"
         required
       />
       <div className="field__error">{meta.touched && meta.error && meta.error}</div>

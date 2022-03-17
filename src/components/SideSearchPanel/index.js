@@ -3,16 +3,13 @@ import './style.scss';
 import petColors from '../../constants/pet_colors';
 
 const SideSearchPanel = () => {
+  const [isVisible, setIsVisible] = React.useState(false);
   const [pawColors, setPawColors] = React.useState(petColors);
   const [pawColor, setPawColor] = React.useState('');
   const searchInputRef = React.useRef();
 
-  const colors = pawColors.map((color) => (
-    <li key={color}><button type="submit" onClick={() => console.log(color)}>{color}</button></li>
-  ));
-
   const onSearchInputActive = () => {
-    searchInputRef.current.classList.add('active');
+    setIsVisible(true);
   };
 
   const onSearch = (value) => {
@@ -28,6 +25,29 @@ const SideSearchPanel = () => {
       }
     }
   };
+  const colors = pawColors.map((color) => (
+    <li key={color}>
+      <button
+        type="button"
+        onClick={() => {
+          setPawColor(color);
+          setIsVisible(false);
+        }}
+      >
+        {color}
+      </button>
+    </li>
+  ));
+
+  React.useEffect(() => {
+    const onOutSideClick = (event) => {
+      if (searchInputRef.current && !searchInputRef.current.contains(event.target)) {
+        setIsVisible(false);
+      }
+    };
+    document.addEventListener('click', onOutSideClick);
+    return () => document.removeEventListener('click', onOutSideClick);
+  }, []);
 
   return (
     <div className="search__panel">
@@ -60,19 +80,17 @@ const SideSearchPanel = () => {
         </div>
         <div className="panel__card">
           <h6 className="title">Color</h6>
-          <div ref={searchInputRef} className="search__input">
+          <div ref={searchInputRef} className={`search__input ${isVisible ? 'active' : ''}`}>
             <input
               type="text"
               name="color"
               placeholder="Color"
               onFocus={onSearchInputActive}
               onChange={(e) => onSearch(e.target.value)}
-              onBlur={() => searchInputRef.current.classList.remove('active')}
               value={pawColor}
+              autoComplete="off"
             />
-            <ul className="match__box">
-              {colors}
-            </ul>
+            <ul className="match__box">{colors}</ul>
           </div>
         </div>
       </div>
