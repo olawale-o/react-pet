@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/User/Home';
 import Auth from './pages/User/Index';
@@ -8,25 +9,35 @@ import { PublicRoute, PrivateRoute } from './components/routes';
 import { Navbar } from './components';
 import MyPets from './pages/Pet/All';
 import Pet from './pages/Pet';
+import AuthContext from './context/AuthContext';
+import authSelector from './redux/auth/auth_selector';
 
-const App = () => (
-  <div className="App">
-    <Navbar />
-    <Routes>
-      <Route path="/login" element={(<PublicRoute><Auth /></PublicRoute>)} />
-      <Route path="/">
-        <Route index path="/" element={(<PrivateRoute><Navigate to="listings" /></PrivateRoute>)} />
-        <Route path="listings" element={(<PrivateRoute><Home /></PrivateRoute>)} />
-        <Route path="profile" element={(<PrivateRoute><Profile /></PrivateRoute>)}>
-          <Route index path="" element={(<PrivateRoute><Navigate to="pets" /></PrivateRoute>)} />
-          <Route path="pets" element={(<PrivateRoute><Pet /></PrivateRoute>)}>
-            <Route index path="" element={(<PrivateRoute><MyPets /></PrivateRoute>)} />
-            <Route path="new" element={(<PrivateRoute><NewPet /></PrivateRoute>)} />
+const App = () => {
+  const { user } = useSelector(authSelector);
+  return (
+    <div className="App">
+      <AuthContext.Provider value={{
+        user,
+      }}
+      >
+        <Navbar />
+        <Routes>
+          <Route path="/login" element={(<PublicRoute><Auth /></PublicRoute>)} />
+          <Route path="/">
+            <Route index path="" element={(<PrivateRoute><Home /></PrivateRoute>)} />
+            <Route path="listings" element={(<PrivateRoute><Home /></PrivateRoute>)} />
+            <Route path=":userId" element={(<PrivateRoute><Profile /></PrivateRoute>)}>
+              <Route index path="" element={(<PrivateRoute><Navigate to="pets" /></PrivateRoute>)} />
+              <Route path="pets" element={(<PrivateRoute><Pet /></PrivateRoute>)}>
+                <Route index path="" element={(<PrivateRoute><MyPets /></PrivateRoute>)} />
+                <Route path="new" element={(<PrivateRoute><NewPet /></PrivateRoute>)} />
+              </Route>
+            </Route>
           </Route>
-        </Route>
-      </Route>
-    </Routes>
-  </div>
-);
+        </Routes>
+      </AuthContext.Provider>
+    </div>
+  );
+};
 
 export default App;
