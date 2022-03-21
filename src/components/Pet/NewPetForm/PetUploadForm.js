@@ -8,7 +8,7 @@ const PetUploadForm = ({ formField, setFieldValue }) => {
     const { files } = e.target;
     const fileArray = Array.from(files).map((file) => URL.createObjectURL(file));
     setSelectedFiles(fileArray);
-    setFieldValue(petImages.name, files);
+    setFieldValue(petImages.name, [...files]);
     Array.from(files).forEach((file) => URL.revokeObjectURL(file));
   };
 
