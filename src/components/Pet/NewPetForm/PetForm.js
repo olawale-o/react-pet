@@ -49,11 +49,11 @@ const PetForm = ({ formField }) => {
 
   const onSearchBreeds = (value) => {
     if (value.trim() === '') {
-      setDogBreeds(petColors);
+      setDogBreeds(dogBreeds);
     } else {
-      const filterColors = dogBreeds.filter((breed) => breed.startsWith(value.toLowerCase()));
-      if (filterColors.length > 0) {
-        setDogBreeds(filterColors);
+      const filterBreeds = dogBreeds.filter((breed) => breed.startsWith(value.toLowerCase()));
+      if (filterBreeds.length > 0) {
+        setDogBreeds(filterBreeds);
       } else {
         setDogBreeds([value]);
       }
