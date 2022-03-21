@@ -6,47 +6,65 @@ import './style.scss';
 import { newPetInitialValues, newPetSchema, newPetModel } from '../../../forms';
 import createPet from '../../../redux/pet/pet_async_action';
 import PetForm from './PetForm';
+import PetUploadForm from './PetUploadForm';
 import { createDogService } from '../../../services';
 
 const { formField } = newPetModel;
 
-const renderForm = () => (
-  <PetForm formField={formField} />
-);
+const renderForm = (step) => {
+  switch (step) {
+    case 0:
+      return <PetForm formField={formField} />;
+    case 1:
+      return <PetUploadForm formField={formField} />;
+    default:
+      return <div>Form Not found</div>;
+  }
+};
 
 const NewPetForm = ({ onSubmit }) => {
+  const [activeStep, setActiveStep] = React.useState(0);
+  const currentValidationSchema = newPetSchema[activeStep];
+  const steps = ['Bio', 'Images'];
+  const isLastStep = activeStep === steps.length - 1;
   const handleSubmit = async ({
     petName,
     petWeight,
     petColor,
     petGender,
-  }) => {
-    await onSubmit({
-      dog: {
-        name: petName,
-        weight: petWeight,
-        color: petColor,
-        gender: petGender,
-      },
-    }, createDogService);
+  }, actions) => {
+    if (isLastStep) {
+      await onSubmit({
+        dog: {
+          name: petName,
+          weight: petWeight,
+          color: petColor,
+          gender: petGender,
+        },
+      }, createDogService);
+    } else {
+      actions.setSubmitting(false);
+      actions.setTouched({});
+      setActiveStep(activeStep + 1);
+    }
   };
 
   return (
     <div className="pet__form">
       <Formik
         initialValues={newPetInitialValues}
-        validationSchema={newPetSchema}
+        validationSchema={currentValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values }) => (
+        {() => (
           <Form>
-            {renderForm()}
+            {renderForm(activeStep)}
             <div className="actions">
-              <button type="submit" className="btn btn--primary">Next</button>
+              {activeStep !== 0 && (<button type="submit" className="btn btn--primary">Back</button>)}
+              <button type="submit" className="btn btn--primary">
+                {isLastStep ? 'Create' : 'Next'}
+              </button>
             </div>
-            <pre>
-              {JSON.stringify(values, null, 2)}
-            </pre>
           </Form>
         )}
       </Formik>
