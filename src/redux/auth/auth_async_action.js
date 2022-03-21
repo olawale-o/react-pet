@@ -7,7 +7,7 @@ export const authenticate = (data, service, push) => (
       const { token, user } = await service(data);
       dispatch(setUser(user));
       dispatch(setToken(token));
-      push('/profile');
+      push(`/${user.id}/pets/new`);
     } catch (e) {
       dispatch(setError(e.response.data.error));
     }
