@@ -8,10 +8,12 @@ import {
   CustomAutoSuggest,
 } from '../../../forms';
 import petColors from '../../../constants/pet_colors';
+import DOG_BREEDS from '../../../constants/dog_breeds';
 
 const PetForm = ({ formField }) => {
   const rangeValueElement = React.useRef();
   const [pawColors, setPawColors] = React.useState(petColors);
+  const [dogBreeds, setDogBreeds] = React.useState(DOG_BREEDS);
   const searchPetColorRef = React.useRef();
   const searchPetBreedRef = React.useRef();
   const [isPetColorListVisible, setIsPetColorListVisible] = React.useState(false);
@@ -41,6 +43,19 @@ const PetForm = ({ formField }) => {
         setPawColors(filterColors);
       } else {
         setPawColors([value]);
+      }
+    }
+  };
+
+  const onSearchBreeds = (value) => {
+    if (value.trim() === '') {
+      setDogBreeds(petColors);
+    } else {
+      const filterColors = dogBreeds.filter((breed) => breed.startsWith(value.toLowerCase()));
+      if (filterColors.length > 0) {
+        setDogBreeds(filterColors);
+      } else {
+        setDogBreeds([value]);
       }
     }
   };
@@ -93,9 +108,9 @@ const PetForm = ({ formField }) => {
           name={petBreed.name}
           autoComplete="off"
           placeholder="Pet Breed"
-          onSearch={onSearch}
+          onSearch={onSearchBreeds}
           onSelected={() => setIsetBreedListVisible(false)}
-          list={pawColors}
+          list={dogBreeds}
           el={searchPetBreedRef}
           onFocus={() => setIsetBreedListVisible(true)}
           isVisible={isPetBreedListVisible}
