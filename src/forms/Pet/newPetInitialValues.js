@@ -8,6 +8,7 @@ const {
     petWeight,
     petDescription,
     petBreed,
+    petImages,
   },
 } = newPetModel;
 
@@ -18,4 +19,5 @@ export default {
   [petWeight.name]: 10,
   [petDescription.name]: '',
   [petBreed.name]: '',
+  [petImages.name]: [],
 };

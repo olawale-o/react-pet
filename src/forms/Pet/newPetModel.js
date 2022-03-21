@@ -37,5 +37,11 @@ export default {
         required: 'Pet breed is required',
       },
     },
+    petImages: {
+      name: 'petImages',
+      error: {
+        required: 'Pet images is required',
+      },
+    },
   },
 };
