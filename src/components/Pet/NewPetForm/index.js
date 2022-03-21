@@ -11,12 +11,12 @@ import { createDogService } from '../../../services';
 
 const { formField } = newPetModel;
 
-const renderForm = (step) => {
+const renderForm = (step, setFieldValue) => {
   switch (step) {
     case 0:
       return <PetForm formField={formField} />;
     case 1:
-      return <PetUploadForm formField={formField} />;
+      return <PetUploadForm formField={formField} setFieldValue={setFieldValue} />;
     default:
       return <div>Form Not found</div>;
   }
@@ -32,16 +32,19 @@ const NewPetForm = ({ onSubmit }) => {
     petWeight,
     petColor,
     petGender,
+    petDescription,
+    petImages,
   }, actions) => {
+    const formData = new FormData();
+    formData.append('dog[name]', petName);
+    formData.append('dog[weight]', petWeight);
+    formData.append('dog[color]', petColor);
+    formData.append('dog[gender]', petGender);
+    formData.append('dog[breed_id]', 1);
+    formData.append('dog[description]', petDescription);
+    petImages.forEach((file) => formData.append('dog[images][]', file));
     if (isLastStep) {
-      await onSubmit({
-        dog: {
-          name: petName,
-          weight: petWeight,
-          color: petColor,
-          gender: petGender,
-        },
-      }, createDogService);
+      await onSubmit(formData, createDogService);
     } else {
       actions.setSubmitting(false);
       actions.setTouched({});
@@ -56,9 +59,9 @@ const NewPetForm = ({ onSubmit }) => {
         validationSchema={currentValidationSchema}
         onSubmit={handleSubmit}
       >
-        {() => (
+        {({ setFieldValue }) => (
           <Form>
-            {renderForm(activeStep)}
+            {renderForm(activeStep, setFieldValue)}
             <div className="actions">
               {activeStep !== 0 && (<button type="submit" className="btn btn--primary">Back</button>)}
               <button type="submit" className="btn btn--primary">
