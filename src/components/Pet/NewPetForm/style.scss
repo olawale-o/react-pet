@@ -1,17 +1,32 @@
+#file-uploader {
+  display: none;
+}
+
+.file__label {
+  width: 100%;
+  padding: 1rem;
+}
+
+.upload__button {
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+  padding: 1rem;
+  background-color: #a11435;
+  border: 1px solid #a11435;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
 .pet__form {
   .actions {
     width: 100%;
     text-align: center;
     display: flex;
-    justify-content: space-between;
-    .btn {
-      width: 48%;
-      padding: 1rem 1.8rem;
-      background: #a11435;
-      color: #fff;
-      border-radius: 10px;
-      font-weight: 700;
-    }
+    justify-content: center;
   }
 
   .search__input {

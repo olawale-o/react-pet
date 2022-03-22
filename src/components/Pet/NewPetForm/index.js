@@ -66,13 +66,13 @@ const NewPetForm = ({ onSubmit }) => {
               {activeStep !== 0 && (
                 <button
                   type="submit"
-                  className="btn btn--primary"
+                  className="btn btn__secondary"
                   onClick={() => setActiveStep(activeStep - 1)}
                 >
                   Back
                 </button>
               )}
-              <button type="submit" className="btn btn--primary">
+              <button type="submit" className="btn btn__primary">
                 {isLastStep ? 'Create' : 'Next'}
               </button>
             </div>

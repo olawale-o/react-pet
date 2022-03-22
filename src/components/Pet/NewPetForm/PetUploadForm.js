@@ -3,6 +3,7 @@ import PropType from 'prop-types';
 
 const PetUploadForm = ({ formField, setFieldValue }) => {
   const [selectedFiles, setSelectedFiles] = React.useState([]);
+  const fileUploadRef = React.useRef();
   const { petImages } = formField;
   const onFileChange = (e) => {
     const { files } = e.target;
@@ -20,7 +21,13 @@ const PetUploadForm = ({ formField, setFieldValue }) => {
         onChange={onFileChange}
         required
         multiple
+        id="file-uploader"
+        ref={fileUploadRef}
+        accept="image/*"
       />
+      <label htmlFor="file-uploader" className="file__label">
+        <button type="button" className="upload__button" onClick={() => fileUploadRef.current?.click()}>Upload</button>
+      </label>
       <div className="drop__zone">
         {selectedFiles && selectedFiles.map((file) => (<img src={file} alt="pet" key={file} />))}
       </div>
