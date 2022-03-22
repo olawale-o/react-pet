@@ -212,6 +212,24 @@ input[type="radio"] {
   background: none;
 }
 
+.btn {
+  width: 48%;
+  padding: 1rem 1.8rem;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.btn__primary {
+  background: #a11435;
+  color: #fff;
+}
+
+.btn__secondary {
+  margin-right: 1rem;
+  background: #3b5998;
+  color: #fff;
+}
+
 .auth-container {
   min-height: 720px;
   display: flex;
