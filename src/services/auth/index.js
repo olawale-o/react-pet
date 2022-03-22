@@ -9,6 +9,6 @@ export const loginService = async (credentials) => {
 
 export const registerService = async (credentials) => {
   const response = await post(`${BASE_URI}v1/users`, { body: credentials });
-  const token = response.headers.authorization;
+  const token = response.headers.authorization.split(' ')[1];
   return { token, user: response.data };
 };
