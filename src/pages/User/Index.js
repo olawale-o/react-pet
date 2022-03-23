@@ -5,7 +5,7 @@ import Login from '../../components/Login';
 import SignUp from '../../components/SignUp';
 import { authenticate } from '../../redux/auth/auth_async_action';
 import { loginService, registerService } from '../../services';
-import useNavigator from '../../helper';
+import { useNavigator } from '../../helper';
 
 const Auth = ({ onSubmit }) => {
   const { pushAndReplace } = useNavigator(true);
