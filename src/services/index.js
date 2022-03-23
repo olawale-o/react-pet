@@ -1,8 +1,9 @@
 import { loginService, registerService } from './auth';
-import createDogService from './pet';
+import { createDogService, allDogService } from './pet';
 
 export {
   loginService,
   registerService,
   createDogService,
+  allDogService,
 };
