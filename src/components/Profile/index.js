@@ -3,27 +3,24 @@ import PropType from 'prop-types';
 import './style.scss';
 import MyPetCard from '../MyPetCard';
 
-const ProfileArea = ({ myPets }) => {
-  console.log('ProfileArea');
-  return (
-    <div className="profile__area">
-      <div className="pets">
-        {myPets.map((pet) => (
-          <MyPetCard
-            key={pet.id}
-            pet={{
-              name: pet.name,
-              offerCount: 2,
-              likeCount: 5,
-              color: pet.color,
-              gender: pet.gender,
-            }}
-          />
-        ))}
-      </div>
+const ProfileArea = ({ myPets }) => (
+  <div className="profile__area">
+    <div className="pets">
+      {myPets.map((pet) => (
+        <MyPetCard
+          key={pet.id}
+          pet={{
+            name: pet.name,
+            offerCount: 2,
+            likeCount: 5,
+            color: pet.color,
+            gender: pet.gender,
+          }}
+        />
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 export default ProfileArea;
 
