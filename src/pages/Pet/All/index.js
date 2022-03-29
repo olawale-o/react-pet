@@ -14,6 +14,9 @@ const MyPets = () => {
   React.useEffect(() => {
     dispatch(getAllPets(allDogService));
   }, [userId]);
+
+  if (myPets === null) return false;
+
   return (<ProfileArea myPets={myPets} />);
 };
 
