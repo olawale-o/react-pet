@@ -17,6 +17,7 @@ const MyPetCard = ({
 }) => (
   <div className="pet__card">
     <div className="pet__image">
+      <div className="remove__btn" />
       <img src={secondDog} alt="dog" />
     </div>
     <div className="pet__content">
