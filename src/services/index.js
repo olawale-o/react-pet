@@ -1,10 +1,2 @@
-import { loginService, registerService } from './auth';
-import { createDogService, allDogService, myDogService } from './pet';
-
-export {
-  loginService,
-  registerService,
-  createDogService,
-  allDogService,
-  myDogService,
-};
+export { loginService, registerService } from './auth';
+export { createDogService, allDogService, myDogService } from './pet';
