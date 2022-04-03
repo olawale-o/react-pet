@@ -9,8 +9,12 @@ import reportWebVitals from './reportWebVitals';
 
 import { configureStore, persistor } from './redux/configureStore';
 import api from './api';
+import { getDogBreedsService } from './services/pet';
+import { getAllBreeds } from './redux/pet/pet_async_action';
 
 const store = configureStore;
+
+store.dispatch(getAllBreeds(getDogBreedsService));
 
 api.interceptors.request.use((config) => {
   const { auth: { token } } = store.getState();
