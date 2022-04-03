@@ -34,15 +34,15 @@ const CustomAutoSuggest = ({
       />
       <ul className="match__box">
         {list.map((item) => (
-          <li key={item}>
+          <li key={item.id}>
             <button
               type="button"
               onClick={() => {
-                setValue(item);
+                setValue(item.name);
                 onSelected();
               }}
             >
-              {item}
+              {item.name}
             </button>
           </li>
         ))}
@@ -60,7 +60,10 @@ CustomAutoSuggest.defaultProps = {
 CustomAutoSuggest.propTypes = {
   type: PropType.string.isRequired,
   placeholder: PropType.string,
-  list: PropType.arrayOf(PropType.string).isRequired,
+  list: PropType.arrayOf(PropType.shape({
+    id: PropType.number.isRequired,
+    name: PropType.string.isRequired,
+  })).isRequired,
   el: PropType.shape({ current: PropType.instanceOf(Element) }).isRequired,
   onSearch: PropType.func.isRequired,
   onSelected: PropType.func.isRequired,
