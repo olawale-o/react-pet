@@ -10,3 +10,8 @@ export const allDogService = async () => {
   const response = await get(`${BASE_URI}v1/dogs`);
   return response.data;
 };
+
+export const myDogService = async (userId) => {
+  const response = await get(`${BASE_URI}v1/users/${userId}/dogs`);
+  return response.data;
+};
