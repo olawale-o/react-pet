@@ -1,8 +1,8 @@
 import BASE_URI from '../../constants';
 import { post, get } from '../../api';
 
-export const createDogService = async (credentials) => {
-  const response = await post(`${BASE_URI}v1/dogs`, { body: credentials });
+export const createDogService = async (credentials, userId) => {
+  const response = await post(`${BASE_URI}v1/users/${userId}/dogs`, { body: credentials });
   return response.data;
 };
 
