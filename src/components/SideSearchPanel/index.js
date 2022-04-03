@@ -17,7 +17,7 @@ const SideSearchPanel = () => {
     if (value.trim() === '') {
       setPawColors(petColors);
     } else {
-      const filterColors = petColors.filter((color) => color.startsWith(value.toLowerCase()));
+      const filterColors = petColors.filter((color) => color.name.startsWith(value.toLowerCase()));
       if (filterColors.length > 0) {
         setPawColors(filterColors);
       } else {
@@ -25,16 +25,16 @@ const SideSearchPanel = () => {
       }
     }
   };
-  const colors = pawColors.map((color) => (
-    <li key={color}>
+  const colors = pawColors.map(({ id, name }) => (
+    <li key={id}>
       <button
         type="button"
         onClick={() => {
-          setPawColor(color);
+          setPawColor(name);
           setIsVisible(false);
         }}
       >
-        {color}
+        {name}
       </button>
     </li>
   ));
