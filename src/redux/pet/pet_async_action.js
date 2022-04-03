@@ -1,5 +1,5 @@
 import { setError } from '../global';
-import { addPet, allPets } from '.';
+import { addPet, allPets, myPets } from '.';
 
 export const createPet = (data, service, push) => (
   async function onPetCreate(dispatch) {
@@ -18,6 +18,17 @@ export const getAllPets = (service) => (
     try {
       const { data: { dogs } } = await service();
       dispatch(allPets(dogs));
+    } catch (e) {
+      dispatch(setError(e.response.data.error));
+    }
+  }
+);
+
+export const getMyPets = (service, userId) => (
+  async function onMyPets(dispatch) {
+    try {
+      const { data: { dogs } } = await service(userId);
+      dispatch(myPets(dogs));
     } catch (e) {
       dispatch(setError(e.response.data.error));
     }
