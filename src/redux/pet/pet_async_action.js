@@ -1,5 +1,10 @@
 import { setError } from '../global';
-import { addPet, allPets, myPets } from '.';
+import {
+  addPet,
+  allPets,
+  myPets,
+  allBreeds,
+} from '.';
 
 export const createPet = (data, service, push, userId) => (
   async function onPetCreate(dispatch) {
@@ -29,6 +34,17 @@ export const getMyPets = (service, userId) => (
     try {
       const { data: { dogs } } = await service(userId);
       dispatch(myPets(dogs));
+    } catch (e) {
+      dispatch(setError(e.response.data.error));
+    }
+  }
+);
+
+export const getAllBreeds = (service) => (
+  async function onAllBreeds(dispatch) {
+    try {
+      const { data: { breeds } } = await service();
+      dispatch(allBreeds(breeds));
     } catch (e) {
       dispatch(setError(e.response.data.error));
     }
