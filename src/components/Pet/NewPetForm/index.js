@@ -4,10 +4,11 @@ import { Formik, Form } from 'formik';
 import PropType from 'prop-types';
 import './style.scss';
 import { newPetInitialValues, newPetSchema, newPetModel } from '../../../forms';
-import createPet from '../../../redux/pet/pet_async_action';
+import { createPet } from '../../../redux/pet/pet_async_action';
 import PetForm from './PetForm';
 import PetUploadForm from './PetUploadForm';
 import { createDogService } from '../../../services';
+import { useNavigator } from '../../../helper';
 
 const { formField } = newPetModel;
 
@@ -22,7 +23,8 @@ const renderForm = (step, setFieldValue) => {
   }
 };
 
-const NewPetForm = ({ onSubmit }) => {
+const NewPetForm = ({ onSubmit, userId, breeds }) => {
+  const { pushAndReplace } = useNavigator(true);
   const [activeStep, setActiveStep] = React.useState(0);
   const currentValidationSchema = newPetSchema[activeStep];
   const steps = ['Bio', 'Images'];
@@ -34,17 +36,18 @@ const NewPetForm = ({ onSubmit }) => {
     petGender,
     petDescription,
     petImages,
+    petBreed,
   }, actions) => {
     const formData = new FormData();
     formData.append('dog[name]', petName);
     formData.append('dog[weight]', petWeight);
     formData.append('dog[color]', petColor);
     formData.append('dog[gender]', petGender);
-    formData.append('dog[breed_id]', 1);
+    formData.append('dog[breed_id]', (breeds.find((obj) => obj.name === petBreed)).id);
     formData.append('dog[description]', petDescription);
     petImages.forEach((file) => formData.append('dog[images][]', file));
     if (isLastStep) {
-      await onSubmit(formData, createDogService);
+      await onSubmit(formData, createDogService, pushAndReplace, userId);
     } else {
       actions.setSubmitting(false);
       actions.setTouched({});
@@ -83,12 +86,22 @@ const NewPetForm = ({ onSubmit }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  userId: state.auth.user.id,
+  breeds: state.pet.breeds,
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (data, service, push) => dispatch(createPet(data, service, push)),
+  onSubmit: (data, service, push, userId) => dispatch(createPet(data, service, push, userId)),
 });
 
 NewPetForm.propTypes = {
   onSubmit: PropType.func.isRequired,
+  userId: PropType.number.isRequired,
+  breeds: PropType.arrayOf(PropType.shape({
+    id: PropType.number.isRequired,
+    name: PropType.string.isRequired,
+  })).isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(NewPetForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NewPetForm);

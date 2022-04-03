@@ -26,6 +26,7 @@ export default ProfileArea;
 
 ProfileArea.propTypes = {
   myPets: PropType.arrayOf(PropType.shape({
+    id: PropType.number,
     name: PropType.string,
     gender: PropType.string,
     color: PropType.string,
