@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ProfileArea } from '../../../components';
-import { getAllPets } from '../../../redux/pet/pet_async_action';
-import { allDogService } from '../../../services';
+import { getMyPets } from '../../../redux/pet/pet_async_action';
+import { myDogService } from '../../../services';
 import petSelector from '../../../redux/pet/pet_selector';
 
 const MyPets = () => {
@@ -12,7 +12,7 @@ const MyPets = () => {
   const { myPets } = useSelector(petSelector);
 
   React.useEffect(() => {
-    dispatch(getAllPets(allDogService));
+    dispatch(getMyPets(myDogService, userId));
   }, [userId]);
 
   if (myPets === null) return false;
