@@ -15,3 +15,8 @@ export const myDogService = async (userId) => {
   const response = await get(`${BASE_URI}v1/users/${userId}/dogs`);
   return response.data;
 };
+
+export const getDogBreedsService = async () => {
+  const response = await get(`${BASE_URI}v1/breeds`);
+  return response.data;
+};
