@@ -10,6 +10,7 @@ const ProfileArea = ({ myPets }) => (
         <MyPetCard
           key={pet.id}
           pet={{
+            id: pet.id,
             name: pet.name,
             offerCount: 2,
             likeCount: 5,
