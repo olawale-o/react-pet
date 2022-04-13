@@ -22,7 +22,7 @@ const App = () => {
       >
         <Navbar />
         <Routes>
-          <Route path="/login" element={(<PublicRoute><Auth /></PublicRoute>)} />
+          <Route path="/session" element={(<PublicRoute><Auth /></PublicRoute>)} />
           <Route path="/">
             <Route index path="" element={(<PrivateRoute><Home /></PrivateRoute>)} />
             <Route path="listings" element={(<PrivateRoute><Home /></PrivateRoute>)} />
