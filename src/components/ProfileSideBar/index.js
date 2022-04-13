@@ -5,25 +5,25 @@ import './style.scss';
 
 const ProfileSideBar = ({ userId }) => (
   <div className="profile__sidebar">
-    <div className="container">
-      <ul className="list">
-        <li className="item">
-          <Link to="/" className="nav__link">
-            <span className="text">Notifications</span>
+    <nav className="nav-container">
+      <ul className="nav_list">
+        <li className="nav_item">
+          <Link to="/" className="link nav_link">
+            <span className="link_text">Notifications</span>
           </Link>
         </li>
-        <li className="item">
-          <Link to={`/${userId}/pets`} className="nav__link">
-            <span className="text">Pets</span>
+        <li className="nav_item">
+          <Link to={`/${userId}/pets`} className="link nav_link">
+            <span className="link_text">Pets</span>
           </Link>
         </li>
-        <li className="item">
-          <Link to={`/${userId}/pets/new`} className="nav__link">
-            <span className="text add">Add Pet</span>
+        <li className="nav_item">
+          <Link to={`/${userId}/pets/new`} className="link nav_link">
+            <span className="link_text primary_link-text d-block text-center">Add Pet</span>
           </Link>
         </li>
       </ul>
-    </div>
+    </nav>
   </div>
 );
 

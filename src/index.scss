@@ -26,10 +26,10 @@ img {
   object-fit: cover;
 }
 
-a {
-  text-decoration: none;
-  color: $light-text-color;
-}
+// a {
+//   text-decoration: none;
+//   color: $light-text-color;
+// }
 
 li {
   list-style: none;
@@ -95,6 +95,52 @@ li {
   color: $text-error-color;
   font-size: 1.4rem;
   font-weight: 400;
+}
+
+.link {
+  font-size: 2rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: $dark-text-color;
+}
+
+.link_text {
+  padding: 1rem;
+  background: transparent;
+  border-radius: 20px;
+  transition: background 0.5s ease-in;
+}
+
+.link_text:hover {
+  background: #eee;
+}
+
+.primary_link-text {
+  background: #a11435;
+  color: #fff;
+  transition: all 0.5s ease-in;
+}
+
+.logo_link {
+  font-size: 4rem;
+  color: $light-text-color;
+  font-weight: $fw-bolder;
+}
+
+.nav_link {
+  display: block;
+  margin-bottom: 2rem;
+
+  &:hover {
+    .link_text {
+      background: #eee;
+    }
+
+    .primary_link-text {
+      background: $light-hover-color;
+      opacity: 0.8;
+    }
+  }
 }
 
 .radio__group {
