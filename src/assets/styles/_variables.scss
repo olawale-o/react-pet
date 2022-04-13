@@ -5,6 +5,7 @@ $light-base-color: #cf0a0d;
 
 /* BUTTON COLORS */
 $inactive-color: #e5999a;
+$light-hover-color: #a11435;
 
 /* TEXT COLORS */
 $inactive-text-color: #fff;
@@ -31,4 +32,17 @@ $default-input-padding: 0.8rem;
 
 .w-100 {
   width: 100%;
+}
+
+/* DISPLAY */
+
+.d-block {
+  display: block;
+}
+
+
+/* TEXT */
+
+.text-center {
+  text-align: center;
 }
