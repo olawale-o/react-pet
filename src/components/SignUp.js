@@ -40,12 +40,25 @@ const SignUp = ({ onActive, isFocus, onRegister }) => {
           <Form>
             <h1>Getting Started</h1>
             <div className="switch-buttons">
-              <button type="button" className={`switch-btn ${!isFocus ? 'active' : ''}`} onClick={() => onReset(handleReset)}>Login</button>
-              <button type="button" className={`switch-btn ${isFocus ? 'active' : ''}`}>Register</button>
+              <button
+                type="button"
+                className="button button-outline"
+                disabled={!isFocus}
+                onClick={() => onReset(handleReset)}
+              >
+                Login
+              </button>
+              <button
+                type="button"
+                className="button button-outline"
+                disabled={isFocus}
+              >
+                Register
+              </button>
             </div>
             <div className="continue-with">
-              <button type="button" className="google">Google</button>
-              <button type="button" className="facebook">Facebook</button>
+              <button type="button" className="button button-social google w-100">Google</button>
+              <button type="button" className="button button-social facebook w-100">Facebook</button>
             </div>
             <div className="or">
               <span className="left" />
@@ -63,7 +76,7 @@ const SignUp = ({ onActive, isFocus, onRegister }) => {
             </div>
             <button
               type="submit"
-              className="auth-btn"
+              className="button button-primary"
               disabled={isSubmitting || !(dirty && isValid)}
             >
               Create

@@ -1,4 +1,34 @@
+/* COLORS */
+$primary-color: #bb3133;
 $dark-base-color: #9d1218;
 $light-base-color: #cf0a0d;
+
+/* BUTTON COLORS */
+$inactive-color: #e5999a;
+
+/* TEXT COLORS */
+$inactive-text-color: #fff;
 $dark-text-color: #020f17;
 $light-text-color: #6a7986;
+$text-error-color: #a32023;
+
+/* FONT WEIGHT */
+$fw-default: 300;
+$fw-light: 400;
+$fw-bold: 500;
+$fw-bolder: 600;
+
+
+/* PADDING */
+$default-input-padding: 0.8rem;
+
+
+/* WIDTH */
+
+.w-50 {
+  width: 50%;
+}
+
+.w-100 {
+  width: 100%;
+}

@@ -11,7 +11,7 @@ html,
 body {
   font-size: 10px;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
+  font-weight: $fw-default;
   background: linear-gradient(145deg, #a11435, #e297a9);
 }
 
@@ -19,6 +19,7 @@ button {
   outline: none;
   border: none;
   cursor: pointer;
+  background: none;
 }
 
 img {
@@ -34,14 +35,64 @@ li {
   list-style: none;
 }
 
+.button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: none;
+  font-weight: 400;
+  font-size: 1.6rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 5px;
+}
+
+.button:disabled {
+  background: $inactive-color;
+  color: $inactive-text-color;
+  cursor: default;
+}
+
+.button-primary {
+  width: 100%;
+  background: $primary-color;
+  color: #fff;
+}
+
+.button-outline {
+  border: 1.5px solid $primary-color;
+}
+
+.button-outline:disabled {
+  border-color: $inactive-color;
+}
+
+.button-social {
+  border-radius: 8px;
+}
+
+.facebook {
+  color: #fff;
+  background: #3b5998;
+}
+
+.google {
+  color: #4a4a4a;
+  border: 1px solid #4a4a4a;
+}
+
 .field {
   width: 100%;
   margin-bottom: 2rem;
   text-align: left;
 }
 
+.input {
+  width: 100%;
+  padding: $default-input-padding;
+}
+
 .field__error {
-  color: red;
+  color: $text-error-color;
   font-size: 1.4rem;
   font-weight: 400;
 }
@@ -243,7 +294,7 @@ input[type="radio"] {
     width: 100%;
     max-width: 68rem;
     position: relative;
-    height: 42rem;
+    height: 48.5rem;
     border-radius: 10px;
     box-shadow:
       0 14px 28px rgba(0, 0, 0, 0.25),
@@ -284,38 +335,21 @@ input[type="radio"] {
           width: 100%;
           margin-bottom: 2rem;
 
-          .switch-btn {
-            padding: 0.8rem 1.8rem;
-            background: #fff;
-            border: none;
-            color: #ccc;
-
-            &:nth-child(1) {
-              margin-right: 2rem;
-            }
-
-            &.active {
-              border: 1px solid #000;
-              color: #000;
-            }
+          .button:first-child {
+            margin-right: 2rem;
           }
         }
 
         .continue-with {
           width: 100%;
           display: flex;
+          flex-direction: column;
           justify-content: space-between;
           margin-bottom: 2rem;
           align-items: center;
 
-          button {
-            width: 48%;
-            padding: 0.8rem 1.8rem;
-
-            &.facebook {
-              background: #3b5998;
-              color: #fff;
-            }
+          .button:first-child {
+            margin-bottom: 1rem;
           }
         }
 
@@ -341,21 +375,6 @@ input[type="radio"] {
             height: 1px;
             background: #000;
           }
-        }
-
-        .field {
-          width: 100%;
-          margin-bottom: 2rem;
-
-          .input {
-            width: 100%;
-            padding: 0.8rem;
-          }
-        }
-
-        .auth-btn {
-          width: 100%;
-          padding: 0.8rem 1.8rem;
         }
       }
     }
