@@ -7,6 +7,7 @@ import {
   CustomInput,
   authModel,
 } from '../forms';
+import AuthFormHeader from './Shared';
 
 const { registerInitialValues } = authInitialValues;
 const { registerSchema } = authSchema;
@@ -38,33 +39,11 @@ const SignUp = ({ onActive, isFocus, onRegister }) => {
       }) => (
         <div className="signup-container">
           <Form>
-            <h1>Getting Started</h1>
-            <div className="switch-buttons">
-              <button
-                type="button"
-                className="button button-outline"
-                disabled={!isFocus}
-                onClick={() => onReset(handleReset)}
-              >
-                Login
-              </button>
-              <button
-                type="button"
-                className="button button-outline"
-                disabled={isFocus}
-              >
-                Register
-              </button>
-            </div>
-            <div className="continue-with">
-              <button type="button" className="button button-social google w-100">Google</button>
-              <button type="button" className="button button-social facebook w-100">Facebook</button>
-            </div>
-            <div className="or">
-              <span className="left" />
-              <span className="text">or</span>
-              <span className="right" />
-            </div>
+            <AuthFormHeader
+              title="Getting Started"
+              isFocus={isFocus}
+              onReset={() => onReset(handleReset)}
+            />
             <div className="field">
               <CustomInput type="text" name={username.name} placeholder="Username" />
             </div>
