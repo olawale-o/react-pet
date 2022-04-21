@@ -20,3 +20,9 @@ export const getDogBreedsService = async () => {
   const response = await get(`${BASE_URI}v1/breeds`);
   return response.data;
 };
+
+export const getSelectedPetService = async (credentials) => {
+  const { userId, petId } = credentials;
+  const response = await get(`${BASE_URI}v1/users/${userId}/dogs/${petId}`);
+  return response.data;
+};
