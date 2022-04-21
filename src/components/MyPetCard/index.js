@@ -6,6 +6,7 @@ import secondDog from '../../assets/images/dog2.jpg';
 import { titlelize, GENDER_ENUM, useNavigator } from '../../helper';
 import './style.scss';
 import { PetUpdateForm } from '../Shared';
+import usePopUp from '../../composables';
 
 const MyPetCard = ({
   pet: {
@@ -18,36 +19,14 @@ const MyPetCard = ({
   },
 }) => {
   const { pushAndReplace } = useNavigator();
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [index, setIndex] = React.useState(0);
   const ref = React.useRef();
   const modalPetRef = React.useRef();
-  React.useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
-      if (isOpen && ref.current && !ref.current.contains(e.target)) {
-        setIsOpen(!isOpen);
-      }
-    };
-    document.addEventListener('click', checkIfClickedOutside);
-    // Cleanup the event listener
-    return () => document.removeEventListener('click', checkIfClickedOutside);
-  }, [isOpen]);
-
-  React.useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      if (index && modalPetRef.current && !modalPetRef.current.contains(e.target)) {
-        setIndex(0);
-      }
-    };
-    document.addEventListener('click', checkIfClickedOutside);
-    return () => document.removeEventListener('click', checkIfClickedOutside);
-  }, [index]);
+  const card = usePopUp(ref, false);
+  const modal = usePopUp(modalPetRef, 0);
   return (
     <>
       <div className="pet__card">
-        {isOpen
+        {card.isVisible
           && (
           <ul className="action__card" ref={ref}>
             <li className="action__card-item">
@@ -63,7 +42,7 @@ const MyPetCard = ({
               <button
                 type="button"
                 className="action__btn"
-                onClick={() => setIndex(id)}
+                onClick={() => modal.setIsVisible(id)}
               >
                 Edit
               </button>
@@ -71,7 +50,7 @@ const MyPetCard = ({
           </ul>
           )}
         <div className="pet__image">
-          <button type="button" className="remove__btn" onClick={() => setIsOpen(!isOpen)}>
+          <button type="button" className="remove__btn" onClick={() => card.setIsVisible(!card.isVisible)}>
             <span><AiOutlineEllipsis size={30} color="#fff" /></span>
           </button>
           <img src={secondDog} alt="dog" />
@@ -101,7 +80,7 @@ const MyPetCard = ({
       </div>
       <PetUpdateForm
         el={modalPetRef}
-        selectedPetIndex={index}
+        selectedPetIndex={modal.isVisible}
       />
     </>
   );

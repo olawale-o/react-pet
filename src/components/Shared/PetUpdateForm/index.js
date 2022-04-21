@@ -18,6 +18,6 @@ const PetUpdateForm = ({ selectedPetIndex, el }) => {
 export default PetUpdateForm;
 
 PetUpdateForm.propTypes = {
-  selectedPetIndex: PropType.bool.isRequired,
+  selectedPetIndex: PropType.oneOfType([PropType.bool, PropType.number]).isRequired,
   el: PropType.shape({ current: PropType.instanceOf(Element) }).isRequired,
 };
