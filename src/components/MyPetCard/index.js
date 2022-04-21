@@ -5,7 +5,7 @@ import PropType from 'prop-types';
 import secondDog from '../../assets/images/dog2.jpg';
 import { titlelize, GENDER_ENUM, useNavigator } from '../../helper';
 import './style.scss';
-import { PetUpdateForm } from '../Shared';
+import UpdatePetForm from '../Pet/UpdatePetForm';
 import usePopUp from '../../composables';
 
 const MyPetCard = ({
@@ -78,7 +78,7 @@ const MyPetCard = ({
           <button type="button" className="details">Details</button>
         </div>
       </div>
-      <PetUpdateForm
+      <UpdatePetForm
         el={modalPetRef}
         selectedPetIndex={modal.isVisible}
       />
