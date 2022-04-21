@@ -7,7 +7,7 @@ import {
   CustomInput,
   authModel,
 } from '../forms';
-import AuthFormHeader from './Shared';
+import { AuthFormHeader } from './Shared';
 
 const { registerInitialValues } = authInitialValues;
 const { registerSchema } = authSchema;
@@ -22,7 +22,6 @@ const SignUp = ({ onActive, isFocus, onRegister }) => {
   };
 
   const auth = async ({ username, email, password }) => {
-    console.log({ username, email, password });
     await onRegister({ username, email, password });
   };
   return (
