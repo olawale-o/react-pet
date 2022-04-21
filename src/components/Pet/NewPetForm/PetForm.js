@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import PropType from 'prop-types';
 import {
   CustomInput,
@@ -8,16 +9,18 @@ import {
   CustomAutoSuggest,
 } from '../../../forms';
 import petColors from '../../../constants/pet_colors';
-import DOG_BREEDS from '../../../constants/dog_breeds';
+import petSelector from '../../../redux/pet/pet_selector';
+import usePopUp from '../../../composables';
 
 const PetForm = ({ formField }) => {
+  const { breeds } = useSelector(petSelector);
   const rangeValueElement = React.useRef();
   const [pawColors, setPawColors] = React.useState(petColors);
-  const [dogBreeds, setDogBreeds] = React.useState(DOG_BREEDS);
+  const [dogBreeds, setDogBreeds] = React.useState(breeds);
   const searchPetColorRef = React.useRef();
   const searchPetBreedRef = React.useRef();
-  const [isPetColorListVisible, setIsPetColorListVisible] = React.useState(false);
-  const [isPetBreedListVisible, setIsetBreedListVisible] = React.useState(false);
+  const petColorPopUp = usePopUp(searchPetColorRef, false);
+  const petBreedPopUp = usePopUp(searchPetBreedRef, false);
 
   const {
     petName,
@@ -49,29 +52,16 @@ const PetForm = ({ formField }) => {
 
   const onSearchBreeds = (value) => {
     if (value.trim() === '') {
-      setDogBreeds(dogBreeds);
+      setDogBreeds(breeds);
     } else {
-      const filterBreeds = dogBreeds.filter((breed) => breed.startsWith(value.toLowerCase()));
+      const filterBreeds = dogBreeds.filter(({ name }) => name.startsWith(value.toLowerCase()));
       if (filterBreeds.length > 0) {
         setDogBreeds(filterBreeds);
       } else {
-        setDogBreeds([value]);
+        setDogBreeds([{ id: breeds.length - 1, name: value }]);
       }
     }
   };
-
-  React.useEffect(() => {
-    const onOutSideClick = (event) => {
-      if (searchPetColorRef.current && !searchPetColorRef.current.contains(event.target)) {
-        setIsPetColorListVisible(false);
-      }
-      if (searchPetBreedRef.current && !searchPetBreedRef.current.contains(event.target)) {
-        setIsetBreedListVisible(false);
-      }
-    };
-    document.addEventListener('click', onOutSideClick);
-    return () => document.removeEventListener('click', onOutSideClick);
-  }, []);
 
   return (
     <div>
@@ -95,11 +85,11 @@ const PetForm = ({ formField }) => {
           autoComplete="off"
           placeholder="Pet Color"
           onSearch={onSearch}
-          onSelected={() => setIsPetColorListVisible(false)}
+          onSelected={() => petColorPopUp.setIsVisible(false)}
           list={pawColors}
           el={searchPetColorRef}
-          onFocus={() => setIsPetColorListVisible(true)}
-          isVisible={isPetColorListVisible}
+          onFocus={() => petColorPopUp.setIsVisible(true)}
+          isVisible={petColorPopUp.isVisible}
         />
       </div>
       <div className="field">
@@ -109,11 +99,11 @@ const PetForm = ({ formField }) => {
           autoComplete="off"
           placeholder="Pet Breed"
           onSearch={onSearchBreeds}
-          onSelected={() => setIsetBreedListVisible(false)}
+          onSelected={() => petBreedPopUp.setIsVisible(false)}
           list={dogBreeds}
           el={searchPetBreedRef}
-          onFocus={() => setIsetBreedListVisible(true)}
-          isVisible={isPetBreedListVisible}
+          onFocus={() => petBreedPopUp.setIsVisible(true)}
+          isVisible={petBreedPopUp.isVisible}
         />
       </div>
       <div className="field">
