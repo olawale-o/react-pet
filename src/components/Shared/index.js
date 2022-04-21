@@ -1,2 +1,3 @@
-export { default as AuthFormHeader } from './AuthFormHeader';
-export { default as PetUpdateForm } from './PetUpdateForm';
+import AuthFormHeader from './AuthFormHeader';
+
+export default AuthFormHeader;

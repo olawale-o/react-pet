@@ -7,7 +7,7 @@ import {
   authModel,
   CustomInput,
 } from '../forms';
-import { AuthFormHeader } from './Shared';
+import AuthFormHeader from './Shared';
 
 const { loginInitialValues } = authInitialValues;
 const { loginSchema } = authSchema;
