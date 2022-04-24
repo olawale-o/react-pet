@@ -2,10 +2,12 @@ export const ADDPET = 'pet/pet/ADDPET';
 export const ALLPET = 'pet/pet/ALLPET';
 export const MYPETS = 'pet/pet/MYPETS';
 export const BREEDS = 'pet/pet/BREEDS';
+export const SELECTEDPET = 'pet/pet/PET';
 
 const initialState = {
   myPets: null,
   allPets: null,
+  selectedPet: null,
   breeds: null,
 };
 
@@ -29,6 +31,11 @@ export const allBreeds = (payload) => ({
   payload,
 });
 
+export const selectedPet = (payload) => ({
+  type: SELECTEDPET,
+  payload,
+});
+
 const petReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case ALLPET:
@@ -39,6 +46,8 @@ const petReducer = (state = initialState, action = {}) => {
       return { ...state, myPets: state.myPets.concat(action.payload) };
     case BREEDS:
       return { ...state, breeds: action.payload };
+    case SELECTEDPET:
+      return { ...state, selectedPet: action.payload };
     default:
       return state;
   }
