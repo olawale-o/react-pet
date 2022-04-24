@@ -6,16 +6,13 @@ const usePopUp = (el, initial) => {
 
   React.useEffect(() => {
     const checkIfClickedOutside = (e) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
       if (isVisible && el.current && !el.current.contains(e.target)) {
-        setIsVisible(!isVisible);
+        setIsVisible(null);
       }
     };
     document.addEventListener('click', checkIfClickedOutside);
-    // Cleanup the event listener
     return () => document.removeEventListener('click', checkIfClickedOutside);
-  }, [isVisible]);
+  }, []);
 
   return { isVisible, setIsVisible };
 };
