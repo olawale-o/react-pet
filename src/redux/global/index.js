@@ -6,9 +6,8 @@ const initialState = {
   error: null,
 };
 
-export const setLoading = (payload) => ({
+export const setLoading = () => ({
   type: LOADING,
-  payload,
 });
 
 export const setError = (payload) => ({
@@ -21,7 +20,7 @@ const globalReducer = (state = initialState, action = {}) => {
     case ERROR:
       return { ...state, loading: false, error: action.payload };
     case LOADING:
-      return { ...state, loading: true };
+      return { ...state, loading: !state.loading };
     default:
       return state;
   }
