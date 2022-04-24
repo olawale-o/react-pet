@@ -1,4 +1,4 @@
-import { setError,setLoading } from '../global';
+import { setError, setLoading } from '../global';
 import { setUser, setToken } from '.';
 
 export const authenticate = (data, service, push) => (
