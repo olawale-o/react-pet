@@ -143,6 +143,18 @@ li {
   }
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: transparent;
+  z-index: 800;
+}
+
 .radio__group {
   display: flex;
   width: 100%;
