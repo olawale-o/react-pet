@@ -13,10 +13,10 @@ export const createPet = (data, service, push, userId) => (
     try {
       const { data: { dog } } = await service(data, userId);
       dispatch(addPet(dog));
-      dispatch(setLoading());
       push(`/${dog.owner_id}/pets`);
     } catch (e) {
       dispatch(setError(e.response.data.error));
+    } finally {
       dispatch(setLoading());
     }
   }
@@ -28,9 +28,9 @@ export const getAllPets = (service) => (
     try {
       const { data: { dogs } } = await service();
       dispatch(allPets(dogs));
-      dispatch(setLoading());
     } catch (e) {
       dispatch(setError(e.response.data.error));
+    } finally {
       dispatch(setLoading());
     }
   }
@@ -42,9 +42,10 @@ export const getMyPets = (service, userId) => (
     try {
       const { data: { dogs } } = await service(userId);
       dispatch(myPets(dogs));
-      dispatch(setLoading());
     } catch (e) {
       dispatch(setError(e.response.data.error));
+    } finally {
+      dispatch(setLoading());
     }
   }
 );
@@ -55,9 +56,9 @@ export const getAllBreeds = (service) => (
     try {
       const { data: { breeds } } = await service();
       dispatch(allBreeds(breeds));
-      dispatch(setLoading());
     } catch (e) {
       dispatch(setError(e.response.data.error));
+    } finally {
       dispatch(setLoading());
     }
   }
@@ -69,9 +70,9 @@ export const getSelectedPet = (credential, service) => (
     try {
       const { data: { dog } } = await service(credential);
       dispatch(selectedPet(dog));
-      dispatch(setLoading());
     } catch (e) {
       dispatch(setError(e.response.data.error));
+    } finally {
       dispatch(setLoading());
     }
   }

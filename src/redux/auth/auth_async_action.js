@@ -8,10 +8,10 @@ export const authenticate = (data, service, push) => (
       const { token, user } = await service(data);
       dispatch(setUser(user));
       dispatch(setToken(token));
-      dispatch(setLoading());
       push(`/${user.id}/pets`);
     } catch (e) {
       dispatch(setError(e.response.data.error));
+    } finally {
       dispatch(setLoading());
     }
   }
