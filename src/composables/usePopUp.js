@@ -7,12 +7,12 @@ const usePopUp = (el, initial) => {
   React.useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (isVisible && el.current && !el.current.contains(e.target)) {
-        setIsVisible(null);
+        setIsVisible(false);
       }
     };
     document.addEventListener('click', checkIfClickedOutside);
     return () => document.removeEventListener('click', checkIfClickedOutside);
-  }, []);
+  }, [isVisible]);
 
   return { isVisible, setIsVisible };
 };

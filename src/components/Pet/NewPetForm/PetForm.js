@@ -41,7 +41,7 @@ const PetForm = ({ formField }) => {
     if (value.trim() === '') {
       setPawColors(petColors);
     } else {
-      const filterColors = petColors.filter((color) => color.startsWith(value.toLowerCase()));
+      const filterColors = petColors.filter((color) => color.name.startsWith(value.toLowerCase()));
       if (filterColors.length > 0) {
         setPawColors(filterColors);
       } else {
