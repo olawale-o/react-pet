@@ -80,9 +80,7 @@ const PetForm = ({ formField }) => {
       </div>
       <div className="field">
         <CustomAutoSuggest
-          type="text"
           name={petColor.name}
-          autoComplete="off"
           placeholder="Pet Color"
           onSearch={onSearch}
           onSelected={() => petColorPopUp.setIsVisible(false)}
@@ -94,9 +92,7 @@ const PetForm = ({ formField }) => {
       </div>
       <div className="field">
         <CustomAutoSuggest
-          type="text"
           name={petBreed.name}
-          autoComplete="off"
           placeholder="Pet Breed"
           onSearch={onSearchBreeds}
           onSelected={() => petBreedPopUp.setIsVisible(false)}

@@ -3,7 +3,6 @@ import { useField } from 'formik';
 import PropType from 'prop-types';
 
 const CustomAutoSuggest = ({
-  type,
   placeholder,
   list,
   el,
@@ -60,7 +59,6 @@ CustomAutoSuggest.defaultProps = {
 };
 
 CustomAutoSuggest.propTypes = {
-  type: PropType.string.isRequired,
   placeholder: PropType.string,
   list: PropType.arrayOf(PropType.shape({
     id: PropType.number.isRequired,
