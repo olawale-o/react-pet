@@ -14,9 +14,9 @@ const CustomAutoSuggest = ({
   ...props
 }) => {
   const [field, meta, helpers] = useField(props);
-  const { name } = field;
+  const { name, onBlur } = field;
   const { setValue } = helpers;
-  const { value } = meta;
+  const { value, touched, error } = meta;
 
   return (
     <div ref={el} className={`search__input ${isVisible ? 'active' : ''}`}>
@@ -28,10 +28,12 @@ const CustomAutoSuggest = ({
           setValue(e.target.value);
           onSearch(e.target.value);
         }}
+        onBlur={onBlur}
         autoComplete="off"
         onFocus={onFocus}
         value={value}
       />
+      <div className="field__error">{touched && error && error}</div>
       <ul className="match__box">
         {list.map((item) => (
           <li key={item.id}>
