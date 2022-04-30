@@ -1,15 +1,19 @@
 import React from 'react';
 import PropType from 'prop-types';
+import { connect } from 'react-redux';
 import './style.scss';
 import MyPetCard from '../MyPetCard';
 import UpdatePetForm from '../Pet/UpdatePetForm';
+import { getSelectedPetService } from '../../services/pet';
+import { getSelectedPet } from '../../redux/pet/pet_async_action';
 
-const ProfileArea = ({ myPets }) => {
+const ProfileArea = ({ myPets, fetchSelectedPet, userId }) => {
   const [choosenPet, setChoosenPet] = React.useState(null);
   const [overlayOpen, toggleOverlayOpen] = React.useState(false);
   const [modalOpen, toggleModalOpen] = React.useState(false);
   const [index, setIndex] = React.useState(null);
   const onChoosePet = (petId) => {
+    fetchSelectedPet({ petId, userId }, getSelectedPetService);
     setChoosenPet(petId);
     setIndex(petId);
     toggleOverlayOpen(!overlayOpen);
@@ -58,7 +62,15 @@ const ProfileArea = ({ myPets }) => {
   );
 };
 
-export default ProfileArea;
+// export default ProfileArea;
+
+const mapStateToProps = (state) => ({
+  userId: state.auth.user.id,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchSelectedPet: (credential, service) => dispatch(getSelectedPet(credential, service)),
+});
 
 ProfileArea.propTypes = {
   myPets: PropType.arrayOf(PropType.shape({
@@ -67,4 +79,8 @@ ProfileArea.propTypes = {
     gender: PropType.string,
     color: PropType.string,
   })).isRequired,
+  fetchSelectedPet: PropType.func.isRequired,
+  userId: PropType.number.isRequired,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileArea);
