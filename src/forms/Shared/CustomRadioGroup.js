@@ -17,6 +17,7 @@ const CustomRadioGroup = ({ fields, ...props }) => {
                 name={name}
                 value={value}
                 onChange={() => setValue(field.fieldValue)}
+                checked={value === field.fieldValue}
               />
               <span className="radio__label">{field.label}</span>
             </div>
