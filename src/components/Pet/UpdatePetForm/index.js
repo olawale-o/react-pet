@@ -12,6 +12,7 @@ import {
   CustomSlider,
   CustomAutoSuggest,
   CustomTextArea,
+  CustomRadioGroup,
 } from '../../../forms';
 import petColors from '../../../constants/pet_colors';
 import usePopUp from '../../../composables';
@@ -23,6 +24,7 @@ const {
     petColor,
     petBreed,
     petDescription,
+    petGender,
   },
 } = newPetModel;
 
@@ -32,6 +34,7 @@ const UpdatePetForm = ({
   closePopUp,
   loading,
   breeds,
+  onSubmit,
 }) => {
   const currentValidationSchema = newPetSchema[0];
   const rangeValueElement = React.useRef();
@@ -49,6 +52,7 @@ const UpdatePetForm = ({
       [petColor.name]: pet.color,
       [petBreed.name]: pet.breed,
       [petDescription.name]: pet.description,
+      [petGender.name]: pet.gender,
     };
   } else {
     initialValues = newPetInitialValues;
@@ -57,9 +61,6 @@ const UpdatePetForm = ({
   if (!open) {
     return null;
   }
-  const handleSubmit = () => {
-    console.log('submit');
-  };
 
   const onSlideBlur = () => rangeValueElement.current.classList.remove('show');
 
@@ -94,7 +95,28 @@ const UpdatePetForm = ({
     }
   };
 
-  console.log('pet', pet);
+  const handleSubmit = async ({
+    petName,
+    petWeight,
+    petColor,
+    petGender,
+    petDescription,
+    petBreed,
+  }) => {
+    const credentials = {
+      dog: {
+        id: pet.id,
+        name: petName,
+        weight: petWeight,
+        color: petColor,
+        description: petDescription,
+        gender: petGender,
+        breed_id: (breeds.find((obj) => obj.name === petBreed)).id,
+      },
+    };
+    await onSubmit(credentials);
+    closePopUp();
+  };
 
   return (
     ReactDOM.createPortal(
@@ -111,7 +133,7 @@ const UpdatePetForm = ({
                   onSubmit={handleSubmit}
                   enableReinitialize
                 >
-                  {() => (
+                  {({ isSubmitting, isValid, dirty }) => (
                     <Form>
                       <div>
                         <div className="field">
@@ -131,10 +153,24 @@ const UpdatePetForm = ({
                           />
                         </div>
                         <div className="field">
+                          <span className="label">Gender</span>
+                          <CustomRadioGroup
+                            name={petGender.name}
+                            fields={[
+                              {
+                                label: 'Male',
+                                fieldValue: 'm',
+                              },
+                              {
+                                label: 'Female',
+                                fieldValue: 'f',
+                              },
+                            ]}
+                          />
+                        </div>
+                        <div className="field">
                           <CustomAutoSuggest
-                            type="text"
                             name={petColor.name}
-                            autoComplete="off"
                             placeholder="Pet color"
                             onSearch={onSearch}
                             onSelected={() => petColorPopUp.setIsVisible(false)}
@@ -146,9 +182,7 @@ const UpdatePetForm = ({
                         </div>
                         <div className="field">
                           <CustomAutoSuggest
-                            type="text"
                             name={petBreed.name}
-                            autoComplete="off"
                             placeholder="Pet breed"
                             onSearch={onSearchBreeds}
                             onSelected={() => petBreedPopUp.setIsVisible(false)}
@@ -162,7 +196,11 @@ const UpdatePetForm = ({
                           <CustomTextArea name={petDescription.name} placeholder="Description" />
                         </div>
                         <div className="actions">
-                          <button type="submit" className="btn btn__primary">
+                          <button
+                            type="submit"
+                            className="btn btn__primary"
+                            disabled={isSubmitting || !(dirty && isValid)}
+                          >
                             Update
                           </button>
                         </div>
@@ -204,4 +242,5 @@ UpdatePetForm.propTypes = {
     id: PropType.number,
     name: PropType.string,
   })),
+  onSubmit: PropType.func.isRequired,
 };
