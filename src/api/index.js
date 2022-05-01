@@ -16,4 +16,10 @@ export const get = async (uri) => {
   return response;
 };
 
+export const put = async (uri, options = {}) => {
+  const { body = {} } = options;
+  const response = await api.put(uri, body);
+  return response;
+};
+
 export default api;
