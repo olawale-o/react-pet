@@ -77,3 +77,18 @@ export const getSelectedPet = (credential, service) => (
     }
   }
 );
+
+export const updatePet = (data, service, userId) => (
+  async function onUpdatePet(dispatch) {
+    dispatch(setLoading());
+    console.log(data);
+    try {
+      const { data: { dog } } = await service(data, userId);
+      dispatch(selectedPet(dog));
+      dispatch(setLoading());
+    } catch (e) {
+      dispatch(setError(e.response.data.error));
+      dispatch(setLoading());
+    }
+  }
+);
