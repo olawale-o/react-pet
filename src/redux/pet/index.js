@@ -3,8 +3,10 @@ export const ALLPET = 'pet/pet/ALLPET';
 export const MYPETS = 'pet/pet/MYPETS';
 export const BREEDS = 'pet/pet/BREEDS';
 export const SELECTEDPET = 'pet/pet/PET';
+export const LOADING = 'pet/pet/LOADING';
 
 const initialState = {
+  loading: false,
   myPets: null,
   allPets: null,
   selectedPet: null,
@@ -36,6 +38,11 @@ export const selectedPet = (payload) => ({
   payload,
 });
 
+export const setLoading = (payload) => ({
+  type: LOADING,
+  payload,
+});
+
 const petReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case ALLPET:
@@ -48,6 +55,8 @@ const petReducer = (state = initialState, action = {}) => {
       return { ...state, breeds: action.payload };
     case SELECTEDPET:
       return { ...state, selectedPet: action.payload };
+    case LOADING:
+      return { ...state, loading: action.payload };
     default:
       return state;
   }

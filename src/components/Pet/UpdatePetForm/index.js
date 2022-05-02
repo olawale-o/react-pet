@@ -128,7 +128,7 @@ const UpdatePetForm = ({
 
 const mapStateToProps = (state) => ({
   pet: state.pet.selectedPet,
-  loading: state.global.loading,
+  loading: state.pet.loading,
   breeds: state.pet.breeds,
 });
 

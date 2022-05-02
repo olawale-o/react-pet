@@ -6,8 +6,9 @@ const initialState = {
   error: null,
 };
 
-export const setLoading = () => ({
+export const setLoading = (payload) => ({
   type: LOADING,
+  payload,
 });
 
 export const setError = (payload) => ({
