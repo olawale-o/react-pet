@@ -5,7 +5,7 @@ import PropType from 'prop-types';
 import './style.scss';
 import { newPetInitialValues, newPetSchema, newPetModel } from '../../../forms';
 import { createPet } from '../../../redux/pet/pet_async_action';
-import PetForm from './PetForm';
+import PetForm from '../PetForm';
 import PetUploadForm from './PetUploadForm';
 import { createDogService } from '../../../services';
 import { useNavigator } from '../../../helper';
