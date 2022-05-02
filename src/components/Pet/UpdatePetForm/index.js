@@ -9,13 +9,6 @@ import {
   newPetModel,
   newPetInitialValues,
 } from '../../../forms';
-// CustomInput,
-// CustomSlider,
-// CustomAutoSuggest,
-// CustomTextArea,
-// CustomRadioGroup,
-// import petColors from '../../../constants/pet_colors';
-// import usePopUp from '../../../composables';
 import PetForm from '../PetForm';
 
 const {
@@ -82,44 +75,51 @@ const UpdatePetForm = ({
   return (
     ReactDOM.createPortal(
       <>
-        <div className="modal" onClick={closePopUp} aria-hidden="true" />
-        {loading && <div className="loading">Loading...</div>}
-        {!loading
-          && (
-            <div className="modal__body">
-              <div className="pet__form w-100">
-                <Formik
-                  initialValues={initialValues}
-                  validationSchema={currentValidationSchema}
-                  onSubmit={handleSubmit}
-                  enableReinitialize
-                >
-                  {() => (
-                    <Form>
-                      <PetForm
-                        formField={{
-                          petName,
-                          petWeight,
-                          petColor,
-                          petBreed,
-                          petDescription,
-                          petGender,
-                        }}
-                      />
-                      <div className="actions">
-                        <button
-                          type="submit"
-                          className="btn btn__primary"
-                        >
-                          Update
-                        </button>
-                      </div>
-                    </Form>
-                  )}
-                </Formik>
+        <div
+          className="modal"
+          aria-hidden="true"
+          onClick={() => {
+            closePopUp();
+          }}
+        >
+          {loading && <div className="loading" />}
+          {!loading
+            && (
+              <div className="modal__body" aria-hidden="true" onClick={(e) => e.stopPropagation()}>
+                <div className="pet__form w-100">
+                  <Formik
+                    initialValues={initialValues}
+                    validationSchema={currentValidationSchema}
+                    onSubmit={handleSubmit}
+                    enableReinitialize
+                  >
+                    {() => (
+                      <Form>
+                        <PetForm
+                          formField={{
+                            petName,
+                            petWeight,
+                            petColor,
+                            petBreed,
+                            petDescription,
+                            petGender,
+                          }}
+                        />
+                        <div className="actions">
+                          <button
+                            type="submit"
+                            className="btn btn__primary"
+                          >
+                            Update
+                          </button>
+                        </div>
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+        </div>
       </>,
       document.body,
     )

@@ -18,7 +18,6 @@ const ProfileArea = ({
   const [modalOpen, toggleModalOpen] = React.useState(false);
   const [index, setIndex] = React.useState(null);
   const onChoosePet = (petId) => {
-    fetchSelectedPet({ petId, userId }, getSelectedPetService);
     setChoosenPet(petId);
     setIndex(petId);
     toggleOverlayOpen(!overlayOpen);
@@ -28,13 +27,16 @@ const ProfileArea = ({
     setChoosenPet(null);
   };
   const openModal = () => {
+    fetchSelectedPet({ petId: index, userId }, getSelectedPetService);
     toggleModalOpen(!modalOpen);
     toggleOverlayOpen(!overlayOpen);
     setChoosenPet(null);
+    document.body.style.overflow = 'hidden';
   };
   const handleUpdate = async (formData) => {
     await onSubmit(formData, updatePetService, userId);
   };
+
   return (
     <div className="profile__area">
       <div className="pets">
@@ -62,16 +64,16 @@ const ProfileArea = ({
           <div className="overlay" aria-hidden="true" onClick={close} />
         )}
       <UpdatePetForm
-        id={index}
         open={modalOpen}
-        closePopUp={() => toggleModalOpen(!modalOpen)}
+        closePopUp={() => {
+          document.body.removeAttribute('style');
+          toggleModalOpen(!modalOpen);
+        }}
         onSubmit={handleUpdate}
       />
     </div>
   );
 };
-
-// export default ProfileArea;
 
 const mapStateToProps = (state) => ({
   userId: state.auth.user.id,
