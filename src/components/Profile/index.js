@@ -67,6 +67,7 @@ const ProfileArea = ({
               likeCount: 5,
               color: pet.color,
               gender: pet.gender,
+              image: pet.images[0].url,
             }}
           />
         ))}

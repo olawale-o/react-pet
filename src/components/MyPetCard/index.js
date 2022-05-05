@@ -2,7 +2,6 @@ import React from 'react';
 import { AiOutlineHeart, AiOutlineEllipsis } from 'react-icons/ai';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import PropType from 'prop-types';
-import secondDog from '../../assets/images/dog2.jpg';
 import { titlelize, GENDER_ENUM } from '../../helper';
 import PetToolTipPopUp from '../Shared/PetToolTipPopUp';
 import './style.scss';
@@ -29,7 +28,7 @@ const MyPetCard = ({
         <button type="button" className="remove__btn" onClick={() => onChoosePet(pet.id)}>
           <span><AiOutlineEllipsis size={30} color="#fff" /></span>
         </button>
-        <img src={secondDog} alt="dog" />
+        <img src={`http://localhost:3000${pet.image}`} alt="dog" />
       </div>
       <div className="pet__content">
         <h6 className="name">{titlelize(pet.name)}</h6>
@@ -71,6 +70,7 @@ MyPetCard.propTypes = {
     likeCount: PropType.number,
     color: PropType.string,
     gender: PropType.string,
+    image: PropType.string,
   }).isRequired,
   choosenPet: PropType.number,
   onChoosePet: PropType.func.isRequired,
