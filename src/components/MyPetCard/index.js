@@ -5,6 +5,7 @@ import PropType from 'prop-types';
 import { titlelize, GENDER_ENUM } from '../../helper';
 import PetToolTipPopUp from '../Shared/PetToolTipPopUp';
 import './style.scss';
+import BASE_URI from '../../constants';
 
 const MyPetCard = ({
   pet,
@@ -28,7 +29,7 @@ const MyPetCard = ({
         <button type="button" className="remove__btn" onClick={() => onChoosePet(pet.id)}>
           <span><AiOutlineEllipsis size={30} color="#fff" /></span>
         </button>
-        <img src={`http://localhost:3000${pet.image}`} alt="dog" />
+        <img src={`${BASE_URI}${pet.image}`} alt="dog" />
       </div>
       <div className="pet__content">
         <h6 className="name">{titlelize(pet.name)}</h6>
