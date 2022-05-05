@@ -35,6 +35,20 @@ li {
   list-style: none;
 }
 
+.bg-dark {
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.heading_6 {
+  font-size: 1.6rem;
+  font-weight: $fw-bolder;
+}
+
 .loading {
   position: absolute;
   top: 50%;
@@ -174,8 +188,7 @@ li {
   bottom: 0;
   height: 100vh;
   width: 100%;
-  background-color: transparent;
-  z-index: 800;
+  z-index: 2000;
 }
 
 .radio__group {
@@ -496,4 +509,41 @@ input[type="radio"] {
     border-bottom-right-radius: 10px;
     z-index: 100;
   }
+}
+
+.delete__container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  background: #fff;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;;
+  z-index: 2500;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.modal__text {
+  font-size: 1.6rem;
+  color: #000;
+  opacity: 0.5;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: $fw-bolder;
+}
+
+.button__cancel {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.button__danger {
+  background: red;
+  color: #fff;
+  margin-bottom: 1rem;
+  border-radius: 10px;
 }
