@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './style.scss';
 import MyPetCard from '../MyPetCard';
 import UpdatePetForm from '../Pet/UpdatePetForm';
+import { DeleteModal } from '../Shared';
 import { getSelectedPetService, updatePetService } from '../../services/pet';
 import { getSelectedPet, updatePet } from '../../redux/pet/pet_async_action';
 
@@ -17,6 +18,8 @@ const ProfileArea = ({
   const [overlayOpen, toggleOverlayOpen] = React.useState(false);
   const [modalOpen, toggleModalOpen] = React.useState(false);
   const [index, setIndex] = React.useState(null);
+  const [toDelete, setToDelete] = React.useState(false);
+
   const onChoosePet = (petId) => {
     setChoosenPet(petId);
     setIndex(petId);
@@ -25,6 +28,7 @@ const ProfileArea = ({
   const close = () => {
     toggleOverlayOpen(!overlayOpen);
     setChoosenPet(null);
+    setToDelete(false);
   };
   const openModal = () => {
     fetchSelectedPet({ petId: index, userId }, getSelectedPetService);
@@ -33,8 +37,15 @@ const ProfileArea = ({
     setChoosenPet(null);
     document.body.style.overflow = 'hidden';
   };
+
   const handleUpdate = async (formData) => {
     await onSubmit(formData, updatePetService, userId);
+  };
+
+  const onPetDelete = (petId) => {
+    console.log('delete', petId);
+    setToDelete(!toDelete);
+    setChoosenPet(null);
   };
 
   return (
@@ -48,6 +59,7 @@ const ProfileArea = ({
             onChoosePet={onChoosePet}
             openModal={openModal}
             modal={modalOpen}
+            onDelete={onPetDelete}
             pet={{
               id: pet.id,
               name: pet.name,
@@ -61,7 +73,11 @@ const ProfileArea = ({
       </div>
       {overlayOpen
         && (
-          <div className="overlay" aria-hidden="true" onClick={close} />
+          <div
+            className={`overlay ${toDelete ? 'bg-dark' : 'bg-transparent'}`}
+            aria-hidden="true"
+            onClick={close}
+          />
         )}
       <UpdatePetForm
         open={modalOpen}
@@ -71,6 +87,7 @@ const ProfileArea = ({
         }}
         onSubmit={handleUpdate}
       />
+      {toDelete && <DeleteModal />}
     </div>
   );
 };
