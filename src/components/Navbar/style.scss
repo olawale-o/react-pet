@@ -1,3 +1,10 @@
+.header {
+  .nav {
+    height: 6rem;
+    background-color: #fff;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .header {
     position: fixed;
@@ -6,8 +13,6 @@
     width: 100%;
     z-index: 2000;
     .nav {
-      height: 6rem;
-      background-color: #fff;
       display: flex;
       justify-content: space-between;
       align-items: center;
