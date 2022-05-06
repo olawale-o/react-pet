@@ -6,6 +6,7 @@ import {
   allBreeds,
   selectedPet,
   setLoading,
+  selectedPetPhotos,
 } from '.';
 
 export const createPet = (data, service, push, userId) => (
@@ -85,6 +86,20 @@ export const updatePet = (data, service, userId) => (
     try {
       const { data: { dog } } = await service(data, userId);
       dispatch(selectedPet(dog));
+    } catch (e) {
+      dispatch(setError(e.response.data.error));
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getPetPhotos = (service, credential) => (
+  async function onPetPhotos(dispatch) {
+    dispatch(setLoading(true));
+    try {
+      const { data: { photos } } = await service(credential);
+      dispatch(selectedPetPhotos(photos));
     } catch (e) {
       dispatch(setError(e.response.data.error));
     } finally {

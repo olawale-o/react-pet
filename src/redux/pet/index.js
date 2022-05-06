@@ -4,6 +4,7 @@ export const MYPETS = 'pet/pet/MYPETS';
 export const BREEDS = 'pet/pet/BREEDS';
 export const SELECTEDPET = 'pet/pet/PET';
 export const LOADING = 'pet/pet/LOADING';
+export const PETPHOTOS = 'pet/pet/photos';
 
 const initialState = {
   loading: false,
@@ -11,6 +12,7 @@ const initialState = {
   allPets: null,
   selectedPet: null,
   breeds: null,
+  photos: [],
 };
 
 export const addPet = (payload) => ({
@@ -38,6 +40,11 @@ export const selectedPet = (payload) => ({
   payload,
 });
 
+export const selectedPetPhotos = (payload) => ({
+  type: PETPHOTOS,
+  payload,
+});
+
 export const setLoading = (payload) => ({
   type: LOADING,
   payload,
@@ -57,6 +64,8 @@ const petReducer = (state = initialState, action = {}) => {
       return { ...state, selectedPet: action.payload };
     case LOADING:
       return { ...state, loading: action.payload };
+    case PETPHOTOS:
+      return { ...state, photos: action.payload };
     default:
       return state;
   }
