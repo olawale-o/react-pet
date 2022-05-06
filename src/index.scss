@@ -7,12 +7,19 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
 html,
 body {
-  font-size: 10px;
   font-family: 'Montserrat', sans-serif;
   font-weight: $fw-default;
   background: linear-gradient(145deg, #a11435, #e297a9);
+}
+
+body {
+  font-size: 62.5%;
 }
 
 button {
