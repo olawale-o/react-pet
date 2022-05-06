@@ -4,4 +4,5 @@ export {
   allDogService,
   myDogService,
   getDogBreedsService,
+  getPetPhotosService,
 } from './pet';

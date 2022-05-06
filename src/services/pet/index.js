@@ -32,3 +32,9 @@ export const updatePetService = async (credentials, userId) => {
   const response = await put(`${BASE_URI}/v1/users/${userId}/dogs/${id}`, { body: credentials });
   return response.data;
 };
+
+export const getPetPhotosService = async (credentials) => {
+  const { petId } = credentials;
+  const response = await get(`${BASE_URI}/v1/dogs/${petId}/photos`);
+  return response.data;
+};
