@@ -2,6 +2,10 @@
   .nav {
     height: 6rem;
     background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
   }
 }
 
@@ -13,10 +17,6 @@
     width: 100%;
     z-index: 2000;
     .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 3rem;
       .logo {
         width: 10rem;
         height: 6rem;
@@ -25,11 +25,16 @@
         justify-content: center;
       }
 
+      .option__list {
+        display: flex;
+        flex: 2;
+        justify-content: flex-end;
+      }
+
       .nav__list {
         display: flex;
-        flex: auto;
+        flex: 4;
         justify-content: flex-end;
-
         .nav__item {
           .btn__link {
             font-size: 1.5rem;

@@ -35,6 +35,28 @@ li {
   list-style: none;
 }
 
+.bookmark {
+  background: transparent;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.bookmark:hover {
+  background: #eee;
+}
+
+.lg {
+  display: none;
+  visibility: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  .lg {
+    visibility: visible;
+  }
+}
+
 .bg-dark {
   background-color: #000;
   opacity: 0.5;

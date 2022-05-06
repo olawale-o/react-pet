@@ -19,6 +19,16 @@
 
 @media screen and (min-width: 768px) {
   .profile__area {
+    max-width: 72.5rem;
+    margin: 0 auto;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 968px) {
+  .profile__area {
+    max-width: 96rem;
+    margin: 0 auto;
     padding: 0;
   }
 }
