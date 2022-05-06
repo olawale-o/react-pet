@@ -7,6 +7,7 @@ import UpdatePetForm from '../Pet/UpdatePetForm';
 import { DeleteModal } from '../Shared';
 import { getSelectedPetService, updatePetService } from '../../services/pet';
 import { getSelectedPet, updatePet } from '../../redux/pet/pet_async_action';
+import { useNavigator } from '../../helper';
 
 const ProfileArea = ({
   myPets,
@@ -14,6 +15,7 @@ const ProfileArea = ({
   userId,
   onSubmit,
 }) => {
+  const { pushAndReplace } = useNavigator();
   const [choosenPet, setChoosenPet] = React.useState(null);
   const [overlayOpen, toggleOverlayOpen] = React.useState(false);
   const [modalOpen, toggleModalOpen] = React.useState(false);
@@ -48,6 +50,10 @@ const ProfileArea = ({
     setChoosenPet(null);
   };
 
+  const onPetPhoto = (petId) => {
+    pushAndReplace(`/${userId}/pets/${petId}/photos`);
+  };
+
   return (
     <div className="profile__area">
       <div className="pets">
@@ -60,6 +66,7 @@ const ProfileArea = ({
             openModal={openModal}
             modal={modalOpen}
             onDelete={onPetDelete}
+            showPhotos={onPetPhoto}
             pet={{
               id: pet.id,
               name: pet.name,
