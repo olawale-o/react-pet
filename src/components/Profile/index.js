@@ -75,7 +75,7 @@ const ProfileArea = ({
       {overlayOpen
         && (
           <div
-            className={`overlay ${toDelete ? 'bg-dark' : 'bg-transparent'}`}
+            className={`overlay ${toDelete ? 'bg-dark z-index-2000' : 'bg-transparent'}`}
             aria-hidden="true"
             onClick={close}
           />

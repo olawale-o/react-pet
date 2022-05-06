@@ -17,6 +17,12 @@ const PetToolTipPopUp = ({ action, deleteAction }) => (
         action={() => action()}
       />
     </ToolTipItem>
+    <ToolTipItem>
+      <PetActionButton
+        text="Photos"
+        action={() => console.log('photos')}
+      />
+    </ToolTipItem>
   </ToolTipPopUp>
 );
 
