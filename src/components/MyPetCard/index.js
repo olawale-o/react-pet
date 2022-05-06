@@ -14,6 +14,7 @@ const MyPetCard = ({
   openModal,
   modal,
   onDelete,
+  showPhotos,
 }) => {
   console.log('sungba');
   return (
@@ -23,6 +24,7 @@ const MyPetCard = ({
           <PetToolTipPopUp
             action={() => openModal()}
             deleteAction={() => onDelete(pet.id)}
+            photoAction={() => showPhotos(pet.id)}
           />
         )}
       <div className="pet__image">
@@ -78,4 +80,5 @@ MyPetCard.propTypes = {
   openModal: PropType.func.isRequired,
   modal: PropType.bool.isRequired,
   onDelete: PropType.func.isRequired,
+  showPhotos: PropType.func.isRequired,
 };
