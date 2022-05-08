@@ -9,6 +9,8 @@ import {
   selectedPetPhotos,
 } from '.';
 
+import normalizeMyPets from '../../Schema/normalizers';
+
 export const createPet = (data, service, push, userId) => (
   async function onPetCreate(dispatch) {
     dispatch(setLoading(true));
@@ -30,6 +32,8 @@ export const getAllPets = (service) => (
     try {
       const { data: { dogs } } = await service();
       dispatch(allPets(dogs));
+      // const normalizedMyPets = normalize(dogs, [petSchema]);
+      // console.log('normalizedMyPets', normalizedMyPets);
     } catch (e) {
       dispatch(setError(e.response.data.error));
     } finally {
@@ -42,8 +46,10 @@ export const getMyPets = (service, userId) => (
   async function onMyPets(dispatch) {
     dispatch(setLoading(true));
     try {
-      const { data: { dogs } } = await service(userId);
-      dispatch(myPets(dogs));
+      const { data: { owner: { dogs } } } = await service(userId);
+      const { pets, petIds, photos } = normalizeMyPets(dogs);
+      dispatch(myPets({ pets, petIds }));
+      dispatch(selectedPetPhotos(photos));
     } catch (e) {
       dispatch(setError(e.response.data.error));
     } finally {
