@@ -9,15 +9,15 @@ import petSelector from '../../../redux/pet/pet_selector';
 const MyPets = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
-  const { myPets } = useSelector(petSelector);
+  const { petIds } = useSelector(petSelector);
 
   React.useEffect(() => {
     dispatch(getMyPets(myDogService, userId));
   }, [userId]);
 
-  if (myPets === null) return false;
+  if (petIds === null) return false;
 
-  return (<ProfileArea myPets={myPets} />);
+  return (<ProfileArea myPets={petIds} />);
 };
 
 export default MyPets;

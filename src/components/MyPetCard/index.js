@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { AiOutlineHeart, AiOutlineEllipsis } from 'react-icons/ai';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import PropType from 'prop-types';
@@ -8,7 +9,7 @@ import './style.scss';
 import BASE_URI from '../../constants';
 
 const MyPetCard = ({
-  pet,
+  petId,
   choosenPet,
   onChoosePet,
   openModal,
@@ -16,22 +17,23 @@ const MyPetCard = ({
   onDelete,
   showPhotos,
 }) => {
-  console.log('sungba');
+  const pet = useSelector((state) => state.pet.myPets[String(petId)]);
+  const petPhoto = useSelector((state) => state.pet.photos[String(pet.images[0])]);
   return (
     <div className="pet__card">
-      {choosenPet === pet.id && !modal
+      {choosenPet === petId && !modal
         && (
           <PetToolTipPopUp
             action={() => openModal()}
-            deleteAction={() => onDelete(pet.id)}
-            photoAction={() => showPhotos(pet.id)}
+            deleteAction={() => onDelete(petId)}
+            photoAction={() => showPhotos(petId)}
           />
         )}
       <div className="pet__image">
-        <button type="button" className="remove__btn" onClick={() => onChoosePet(pet.id)}>
+        <button type="button" className="remove__btn" onClick={() => onChoosePet(petId)}>
           <span><AiOutlineEllipsis size={30} color="#fff" /></span>
         </button>
-        <img src={`${BASE_URI}${pet.image}`} alt="dog" />
+        <img src={`${BASE_URI}${petPhoto.url}`} alt="dog" />
       </div>
       <div className="pet__content">
         <h6 className="name">{titlelize(pet.name)}</h6>
@@ -44,13 +46,13 @@ const MyPetCard = ({
             <span>
               <AiOutlineHeart size={20} />
             </span>
-            <span>{pet.likeCount}</span>
+            <span>5</span>
           </button>
           <button type="button" className="interaction__btn">
             <span>
               <MdOutlineLocalOffer />
             </span>
-            <span>{pet.offerCount}</span>
+            <span>2</span>
           </button>
         </div>
         <button type="button" className="details">Details</button>
@@ -66,15 +68,7 @@ MyPetCard.defaultProps = {
 };
 
 MyPetCard.propTypes = {
-  pet: PropType.shape({
-    id: PropType.number,
-    name: PropType.string,
-    offerCount: PropType.number,
-    likeCount: PropType.number,
-    color: PropType.string,
-    gender: PropType.string,
-    image: PropType.string,
-  }).isRequired,
+  petId: PropType.number.isRequired,
   choosenPet: PropType.number,
   onChoosePet: PropType.func.isRequired,
   openModal: PropType.func.isRequired,

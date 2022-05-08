@@ -59,7 +59,7 @@ const ProfileArea = ({
       <div className="pets">
         {myPets.map((pet) => (
           <MyPetCard
-            key={pet.id}
+            key={pet}
             choosenPet={choosenPet}
             setChoosenPet={setChoosenPet}
             onChoosePet={onChoosePet}
@@ -67,15 +67,7 @@ const ProfileArea = ({
             modal={modalOpen}
             onDelete={onPetDelete}
             showPhotos={onPetPhoto}
-            pet={{
-              id: pet.id,
-              name: pet.name,
-              offerCount: 2,
-              likeCount: 5,
-              color: pet.color,
-              gender: pet.gender,
-              image: pet.images[0].url,
-            }}
+            petId={pet}
           />
         ))}
       </div>
@@ -114,12 +106,7 @@ ProfileArea.defaultProps = {
 };
 
 ProfileArea.propTypes = {
-  myPets: PropType.arrayOf(PropType.shape({
-    id: PropType.number,
-    name: PropType.string,
-    gender: PropType.string,
-    color: PropType.string,
-  })).isRequired,
+  myPets: PropType.arrayOf(PropType.number).isRequired,
   fetchSelectedPet: PropType.func.isRequired,
   userId: PropType.number.isRequired,
   onSubmit: PropType.func,
