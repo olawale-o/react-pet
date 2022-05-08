@@ -60,6 +60,7 @@ const petReducer = (state = initialState, action = {}) => {
         ...state,
         myPets: action.payload.pets,
         petIds: action.payload.petIds,
+        photos: action.payload.photos,
       };
     case ADDPET:
       return { ...state, myPets: state.myPets.concat(action.payload) };
@@ -70,7 +71,10 @@ const petReducer = (state = initialState, action = {}) => {
     case LOADING:
       return { ...state, loading: action.payload };
     case PETPHOTOS:
-      return { ...state, photos: action.payload };
+      return {
+        ...state,
+        photos: { ...state.photos, ...action.payload },
+      };
     default:
       return state;
   }
