@@ -1,24 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { VscLocation } from 'react-icons/vsc';
 import { AiOutlineHeart, AiOutlineCamera } from 'react-icons/ai';
+import { titlelize, GENDER_ENUM } from '../../helper';
+import BASE_URI from '../../constants';
 import './style.scss';
 
-const ListingPetCard = () => {
-  console.log('Dogs');
+const ListingPetCard = ({ pet }) => {
+  console.log('pet');
 
   return (
     <div className="listing__dog">
       <div className="img">
-        <img src="https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg" alt="dog" />
+        <img src={`${BASE_URI}${pet.images[0].url}`} alt="dog" />
         <div className="media">
           <div className="camera">
             <span className="icon mx-2"><AiOutlineCamera size={15} aria-label="camera" /></span>
-            <span>2</span>
+            <span>{pet.images.length}</span>
           </div>
         </div>
       </div>
       <div className="details">
-        <h1>Doggokk</h1>
+        <h1>{titlelize(pet.name)}</h1>
         <div className="middle">
           <span className="for">BREEDER</span>
           <p>
@@ -32,9 +35,9 @@ const ListingPetCard = () => {
         </p>
 
         <div className="bottom">
-          <span className="tag">Bullmastiff</span>
+          <span className="tag">{titlelize(pet.name)}</span>
           <div className="dot" />
-          <span className="tag">Female</span>
+          <span className="tag">{GENDER_ENUM[pet.gender]}</span>
         </div>
       </div>
       <div className="interaction">
@@ -45,6 +48,18 @@ const ListingPetCard = () => {
       </div>
     </div>
   );
+};
+
+ListingPetCard.propTypes = {
+  pet: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    gender: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.shape({
+      filename: PropTypes.string,
+      url: PropTypes.string,
+    })),
+  }).isRequired,
 };
 
 export default ListingPetCard;
