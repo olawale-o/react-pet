@@ -10,6 +10,7 @@ const Photos = () => {
   const dispatch = useDispatch();
   const { petId } = useParams();
   const { photos } = useSelector(petSelector);
+  const petPhotos = useSelector((state) => state.pet.myPets[String(petId)].images);
   React.useEffect(() => {
     dispatch(getPetPhotos(getPetPhotosService, { petId }));
   }, [petId]);
@@ -17,7 +18,7 @@ const Photos = () => {
   if (!photos) return null;
 
   return (
-    <PhotoList photos={photos} />
+    <PhotoList photos={petPhotos} />
   );
 };
 
