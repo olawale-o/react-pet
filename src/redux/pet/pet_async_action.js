@@ -72,12 +72,11 @@ export const getAllBreeds = (service) => (
   }
 );
 
-export const getSelectedPet = (credential, service) => (
+export const getSelectedPet = (credential) => (
   async function onSelectedPet(dispatch) {
     dispatch(setLoading(true));
     try {
-      const { data: { dog } } = await service(credential);
-      dispatch(selectedPet(dog));
+      dispatch(selectedPet(credential));
     } catch (e) {
       dispatch(setError(e.response.data.error));
     } finally {

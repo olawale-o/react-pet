@@ -5,7 +5,8 @@ import './style.scss';
 import MyPetCard from '../MyPetCard';
 import UpdatePetForm from '../Pet/UpdatePetForm';
 import { DeleteModal } from '../Shared';
-import { getSelectedPetService, updatePetService } from '../../services/pet';
+import { updatePetService } from '../../services/pet';
+// getSelectedPetService
 import { getSelectedPet, updatePet } from '../../redux/pet/pet_async_action';
 import { useNavigator } from '../../helper';
 
@@ -14,6 +15,7 @@ const ProfileArea = ({
   fetchSelectedPet,
   userId,
   onSubmit,
+  pets,
 }) => {
   const { pushAndReplace } = useNavigator();
   const [choosenPet, setChoosenPet] = React.useState(null);
@@ -33,7 +35,8 @@ const ProfileArea = ({
     setToDelete(false);
   };
   const openModal = () => {
-    fetchSelectedPet({ petId: index, userId }, getSelectedPetService);
+    const pet = pets[index];
+    fetchSelectedPet(pet);
     toggleModalOpen(!modalOpen);
     toggleOverlayOpen(!overlayOpen);
     setChoosenPet(null);
@@ -94,15 +97,17 @@ const ProfileArea = ({
 
 const mapStateToProps = (state) => ({
   userId: state.auth.user.id,
+  pets: state.pet.myPets,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchSelectedPet: (credential, service) => dispatch(getSelectedPet(credential, service)),
+  fetchSelectedPet: (petId) => dispatch(getSelectedPet(petId)),
   onSubmit: (formData, service, userId) => dispatch(updatePet(formData, service, userId)),
 });
 
 ProfileArea.defaultProps = {
   onSubmit: () => {},
+  pets: {},
 };
 
 ProfileArea.propTypes = {
@@ -110,6 +115,7 @@ ProfileArea.propTypes = {
   fetchSelectedPet: PropType.func.isRequired,
   userId: PropType.number.isRequired,
   onSubmit: PropType.func,
+  pets: PropType.shape({}),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileArea);
