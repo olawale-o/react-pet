@@ -6,7 +6,6 @@ import MyPetCard from '../MyPetCard';
 import UpdatePetForm from '../Pet/UpdatePetForm';
 import { DeleteModal } from '../Shared';
 import { updatePetService } from '../../services/pet';
-// getSelectedPetService
 import { getSelectedPet, updatePet } from '../../redux/pet/pet_async_action';
 import { useNavigator } from '../../helper';
 
