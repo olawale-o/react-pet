@@ -50,7 +50,6 @@ export const getMyPets = (service, userId) => (
       const { pets, petIds, photos } = normalizeMyPets(dogs);
       dispatch(myPets({ pets, petIds, photos }));
     } catch (e) {
-      console.log('errororoorororo', e);
       dispatch(setError(e.response.data.error));
     } finally {
       dispatch(setLoading(false));
