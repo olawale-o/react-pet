@@ -4,7 +4,7 @@ import { AiOutlineHeart, AiOutlineEllipsis } from 'react-icons/ai';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import PropType from 'prop-types';
 import { titlelize, GENDER_ENUM } from '../../helper';
-import PetToolTipPopUp from '../Shared/PetToolTipPopUp';
+import { CustomToolTipPopUp, ToolTipButton, ToolTipItem } from '../Shared';
 import './style.scss';
 import BASE_URI from '../../constants';
 
@@ -17,16 +17,38 @@ const MyPetCard = ({
   onDelete,
   showPhotos,
 }) => {
+  const actions = [
+    {
+      id: 1,
+      text: 'Delete',
+      func: () => onDelete(petId),
+    },
+    {
+      id: 2,
+      text: 'Edit',
+      func: () => openModal(),
+    },
+    {
+      id: 3,
+      text: 'Photos',
+      func: () => showPhotos(petId),
+    },
+  ];
   const pet = useSelector((state) => state.pet.myPets[String(petId)]);
   return (
     <div className="pet__card">
       {choosenPet === petId && !modal
         && (
-          <PetToolTipPopUp
-            action={() => openModal()}
-            deleteAction={() => onDelete(petId)}
-            photoAction={() => showPhotos(petId)}
-          />
+          <CustomToolTipPopUp>
+            {actions.map(({ id, text, func }) => (
+              <ToolTipItem key={id}>
+                <ToolTipButton
+                  text={text}
+                  action={func}
+                />
+              </ToolTipItem>
+            ))}
+          </CustomToolTipPopUp>
         )}
       <div className="pet__image">
         <button type="button" className="remove__btn" onClick={() => onChoosePet(petId)}>
