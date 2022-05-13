@@ -18,7 +18,6 @@ const MyPetCard = ({
   showPhotos,
 }) => {
   const pet = useSelector((state) => state.pet.myPets[String(petId)]);
-  const petPhoto = useSelector((state) => state.pet.photos[String(pet.images[0])]);
   return (
     <div className="pet__card">
       {choosenPet === petId && !modal
@@ -33,7 +32,7 @@ const MyPetCard = ({
         <button type="button" className="remove__btn" onClick={() => onChoosePet(petId)}>
           <span><AiOutlineEllipsis size={30} color="#fff" /></span>
         </button>
-        <img src={`${BASE_URI}${petPhoto.url}`} alt="dog" />
+        <img src={`${BASE_URI}${pet.pic_url}`} alt="dog" />
       </div>
       <div className="pet__content">
         <h6 className="name">{titlelize(pet.name)}</h6>
