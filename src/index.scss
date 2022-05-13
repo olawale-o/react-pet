@@ -580,3 +580,26 @@ input[type="radio"] {
   margin-bottom: 1rem;
   border-radius: 10px;
 }
+
+.action__card {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  z-index: 1000;
+  width: 80%;
+  border-radius: 10px;
+  .action__btn {
+    background: #fff;
+    border: none;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.6rem;
+    &:hover {
+      background: #eee;
+      color: #000;
+    }
+  }
+}
