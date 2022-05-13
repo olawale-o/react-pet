@@ -1,6 +1,6 @@
 import PropType from 'prop-types';
 
-const PetActionButton = ({ text, action, item }) => (
+const ToolTipButton = ({ text, action, item }) => (
   <button
     type="button"
     className="action__btn"
@@ -10,13 +10,13 @@ const PetActionButton = ({ text, action, item }) => (
   </button>
 );
 
-export default PetActionButton;
+export default ToolTipButton;
 
-PetActionButton.defaultProps = {
+ToolTipButton.defaultProps = {
   item: 0,
 };
 
-PetActionButton.propTypes = {
+ToolTipButton.propTypes = {
   text: PropType.string.isRequired,
   action: PropType.func.isRequired,
   item: PropType.oneOfType([PropType.number, PropType.string]),
