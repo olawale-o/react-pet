@@ -54,7 +54,11 @@ export const setLoading = (payload) => ({
 const petReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case ALLPET:
-      return { ...state, allPets: action.payload };
+      return {
+        ...state,
+        allPets: action.payload.pets,
+        petIds: [...new Set(state.petIds.concat(action.payload.petIds))],
+      };
     case MYPETS:
       return {
         ...state,
