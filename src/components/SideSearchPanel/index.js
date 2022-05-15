@@ -1,12 +1,23 @@
 import React from 'react';
 import './style.scss';
-import petColors from '../../constants/pet_colors';
+import { petColors, genders, breedTypes } from '../../constants';
 
 const SideSearchPanel = () => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [pawColors, setPawColors] = React.useState(petColors);
   const [pawColor, setPawColor] = React.useState('');
   const searchInputRef = React.useRef();
+  const [gender, setGender] = React.useState('both');
+  const [breed, setBreed] = React.useState('both');
+
+  const onGenderSelected = (e) => {
+    setGender(e.target.value);
+  };
+
+  const onBreedSelected = (e) => {
+    console.log(e.target.value);
+    setBreed(e.target.value);
+  };
 
   const onSearchInputActive = () => {
     setIsVisible(true);
@@ -55,27 +66,39 @@ const SideSearchPanel = () => {
         <div className="panel__card">
           <h6 className="title">Gender</h6>
           <ul className="list">
-            <li className="item">
-              <input type="checkbox" id="female" className="checkbox" />
-              <label htmlFor="female">Female</label>
-            </li>
-            <li className="item">
-              <input type="checkbox" id="male" className="checkbox" />
-              <label htmlFor="male">Male</label>
-            </li>
+            {genders.map(({ name, value }) => (
+              <li className="item" key={value}>
+                <input
+                  type="radio"
+                  id={value}
+                  className="checkbox"
+                  name="gender"
+                  value={value}
+                  onChange={onGenderSelected}
+                  checked={gender === value}
+                />
+                <label htmlFor={value}>{name}</label>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="panel__card">
           <h6 className="title">Category</h6>
           <ul className="list">
-            <li className="item">
-              <input type="checkbox" id="breeder" className="checkbox" />
-              <label htmlFor="breeder">Breeder</label>
-            </li>
-            <li className="item">
-              <input type="checkbox" id="non-breeder" className="checkbox" />
-              <label htmlFor="non-breeder">Non Breeder</label>
-            </li>
+            {breedTypes.map(({ name, value }) => (
+              <li className="item" key={value}>
+                <input
+                  type="radio"
+                  id={value}
+                  value={value}
+                  name="breed"
+                  className="checkbox"
+                  onChange={onBreedSelected}
+                  checked={breed === value}
+                />
+                <label htmlFor={value}>{name}</label>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="panel__card">
