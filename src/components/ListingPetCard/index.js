@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { VscLocation } from 'react-icons/vsc';
 import { AiOutlineHeart, AiOutlineCamera } from 'react-icons/ai';
@@ -6,13 +7,13 @@ import { titlelize, GENDER_ENUM } from '../../helper';
 import BASE_URI from '../../constants';
 import './style.scss';
 
-const ListingPetCard = ({ pet }) => {
-  console.log('pet');
+const ListingPetCard = ({ petId }) => {
+  const pet = useSelector((state) => state.pet.allPets[String(petId)]);
 
   return (
     <div className="listing__dog">
       <div className="img">
-        <img src={`${BASE_URI}${pet.images[0].url}`} alt="dog" />
+        <img src={`${BASE_URI}${pet.pic_url}`} alt="dog" />
         <div className="media">
           <div className="camera">
             <span className="icon mx-2"><AiOutlineCamera size={15} aria-label="camera" /></span>
@@ -51,15 +52,7 @@ const ListingPetCard = ({ pet }) => {
 };
 
 ListingPetCard.propTypes = {
-  pet: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    gender: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.shape({
-      filename: PropTypes.string,
-      url: PropTypes.string,
-    })),
-  }).isRequired,
+  petId: PropTypes.number.isRequired,
 };
 
 export default ListingPetCard;

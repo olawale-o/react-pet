@@ -4,15 +4,15 @@ import ListingPetCard from '../ListingPetCard';
 import Filter from '../Filter';
 import './style.scss';
 
-const PetListing = ({ pets }) => {
+const PetListing = ({ petIds }) => {
   console.log('ListingPet');
 
   return (
     <div className="listings">
       <Filter />
       <div className="listing__pet">
-        {pets.map((pet) => (
-          <ListingPetCard key={pet.id} pet={pet} />
+        {petIds.map((petId) => (
+          <ListingPetCard key={petId} petId={petId} />
         ))}
       </div>
     </div>
@@ -20,8 +20,6 @@ const PetListing = ({ pets }) => {
 };
 
 PetListing.propTypes = {
-  pets: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-  })).isRequired,
+  petIds: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 export default PetListing;

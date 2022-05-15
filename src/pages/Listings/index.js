@@ -2,17 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PetListing, SideSearchPanel } from '../../components';
 
-const Listings = ({ pets }) => (
+const Listings = ({ petIds }) => (
   <>
     <SideSearchPanel />
-    <PetListing pets={pets} />
+    <PetListing petIds={petIds} />
   </>
 );
 
 Listings.propTypes = {
-  pets: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-  })).isRequired,
+  petIds: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default Listings;

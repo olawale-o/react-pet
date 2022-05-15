@@ -6,16 +6,16 @@ import './Home.scss';
 import { allDogService } from '../../services';
 import { getAllPets } from '../../redux/pet/pet_async_action';
 
-const Home = ({ pets, fetchPets }) => {
+const Home = ({ petIds, fetchPets }) => {
   React.useEffect(() => {
     fetchPets(allDogService);
   }, []);
-  if (!pets) return null;
+  if (!petIds) return null;
   return (
     <div className="home">
       <div className="content">
         <div className="main">
-          <Listings pets={pets} />
+          <Listings petIds={petIds} />
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@ const Home = ({ pets, fetchPets }) => {
 };
 
 const mapStateToProps = (state) => ({
-  pets: state.pet.allPets,
+  petIds: state.pet.petIds,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -31,13 +31,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Home.defaultProps = {
-  pets: [],
+  petIds: [],
 };
 
 Home.propTypes = {
-  pets: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-  })),
+  petIds: PropTypes.arrayOf(PropTypes.number),
   fetchPets: PropTypes.func.isRequired,
 };
 
