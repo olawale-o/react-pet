@@ -14,6 +14,7 @@ const initialState = {
   breeds: null,
   photos: [],
   petIds: [],
+  myPetIds: [],
 };
 
 export const addPet = (payload) => ({
@@ -57,13 +58,13 @@ const petReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         allPets: action.payload.pets,
-        petIds: [...new Set(state.petIds.concat(action.payload.petIds))],
+        petIds: action.payload.petIds,
       };
     case MYPETS:
       return {
         ...state,
         myPets: action.payload.pets,
-        petIds: action.payload.petIds,
+        myPetIds: action.payload.petIds,
         photos: action.payload.photos,
       };
     case ADDPET:
