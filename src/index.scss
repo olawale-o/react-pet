@@ -603,3 +603,26 @@ input[type="radio"] {
     }
   }
 }
+
+.interaction__btn {
+  font-size: 1.8rem;
+  margin-right: 1rem;
+  padding: 0 0.5rem;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  .icon {
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 20px;
+    display: inline-grid;
+    place-items: center;
+    transition: all 0.5s ease-in;
+  }
+
+  &:hover {
+    .icon {
+      background: #e297a9;
+    }
+  }
+}

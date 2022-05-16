@@ -63,17 +63,17 @@ const MyPetCard = ({
           <span>{titlelize(pet.color)}</span>
         </div>
         <div className="interactions">
-          <button type="button" className="interaction__btn">
-            <span>
-              <AiOutlineHeart size={20} />
+          <button type="button" className="interaction__btn" title="like">
+            <span className="icon" title="like">
+              <AiOutlineHeart size={20} aria-label="like" title="like" />
             </span>
-            <span>5</span>
+            <span className="count">5</span>
           </button>
           <button type="button" className="interaction__btn">
-            <span>
-              <MdOutlineLocalOffer />
+            <span className="icon">
+              <MdOutlineLocalOffer size={20} aria-label="offer" title="offer" />
             </span>
-            <span>2</span>
+            <span count="count">2</span>
           </button>
         </div>
         <button type="button" className="details">Details</button>
