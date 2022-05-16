@@ -1,22 +1,28 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import './style.scss';
 import { petColors, genders, breedTypes } from '../../constants';
 
 const SideSearchPanel = () => {
+  const [search, setSearch] = useSearchParams();
   const [isVisible, setIsVisible] = React.useState(false);
   const [pawColors, setPawColors] = React.useState(petColors);
-  const [pawColor, setPawColor] = React.useState('');
+  const [pawColor, setPawColor] = React.useState('all');
   const searchInputRef = React.useRef();
   const [gender, setGender] = React.useState('both');
   const [breed, setBreed] = React.useState('both');
 
   const onGenderSelected = (e) => {
-    setGender(e.target.value);
+    const { target: { value } } = e;
+    setGender(value);
+    setSearch({ gender: value, breeder: breed, color: pawColor });
+    console.log(search);
   };
 
   const onBreedSelected = (e) => {
-    console.log(e.target.value);
-    setBreed(e.target.value);
+    const { target: { value } } = e;
+    setBreed(value);
+    setSearch({ gender, breeder: value, color: pawColor });
   };
 
   const onSearchInputActive = () => {
@@ -43,6 +49,7 @@ const SideSearchPanel = () => {
         onClick={() => {
           setPawColor(name);
           setIsVisible(false);
+          setSearch({ gender, breeder: breed, color: name });
         }}
       >
         {name}
@@ -51,6 +58,7 @@ const SideSearchPanel = () => {
   ));
 
   React.useEffect(() => {
+    setSearch({ gender: 'both', breeder: 'both', color: 'all' });
     const onOutSideClick = (event) => {
       if (searchInputRef.current && !searchInputRef.current.contains(event.target)) {
         setIsVisible(false);
