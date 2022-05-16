@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables';
+
 @media screen and (min-width: 500px) {
   .listing__dog {
     position: relative;
@@ -5,6 +7,9 @@
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 10px;
+    &:hover {
+      background: #eee;
+    }
     .link-overlay {
       position: absolute;
       left: 0;
@@ -12,9 +17,6 @@
       bottom: 0;
       top: 0;
       border-radius: inherit;
-      &:hover {
-        background: #eee;
-      }
     }
     .inner {
       position: relative;
@@ -67,8 +69,21 @@
     
         h1 {
           font-size: 1.5rem;
-          font-weight: bold;
           margin-bottom: 1.5rem;
+
+          .pet_name {
+            font-weight: bold;
+          }
+
+          .owner_name {
+            color: $light-text-color;
+            text-decoration: none;
+            position: relative;
+            pointer-events: all;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
         }
     
         .middle {

@@ -29,7 +29,16 @@ const ListingPetCard = ({ petId }) => {
           </div>
         </div>
         <div className="details">
-          <h1>{titlelize(pet.name)}</h1>
+          <h1>
+            <span className="pet_name">
+              {titlelize(pet.name)}
+            </span>
+            {' '}
+            <Link className="owner_name" to="/#">
+              @
+              {titlelize(pet.owner)}
+            </Link>
+          </h1>
           <div className="middle">
             <span className="for">BREEDER</span>
             <p>
