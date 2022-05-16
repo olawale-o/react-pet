@@ -10,6 +10,7 @@ import { Navbar } from './components';
 import MyPets from './pages/Pet/All';
 import Pet from './pages/Pet';
 import Photos from './pages/Pet/Photos';
+import PetDetail from './pages/Pet/Detail';
 import AuthContext from './context/AuthContext';
 import authSelector from './redux/auth/auth_selector';
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/">
             <Route index path="" element={(<PrivateRoute><Home /></PrivateRoute>)} />
             <Route path="listings" element={(<PrivateRoute><Home /></PrivateRoute>)} />
+            <Route path="listings/:petId" element={(<PrivateRoute><PetDetail /></PrivateRoute>)} />
             <Route path=":userId" element={(<PrivateRoute><Profile /></PrivateRoute>)}>
               <Route path="pets/:petId" element={(<PrivateRoute><Pet /></PrivateRoute>)}>
                 <Route path="photos" element={(<PrivateRoute><Photos /></PrivateRoute>)} />
