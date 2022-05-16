@@ -28,9 +28,14 @@ const Navbar = () => (
               </li>
             )}
             {user && (
-              <li className="nav__item">
-                <Link to="/" type="button" className="btn__link btn-login">Logout</Link>
-              </li>
+              <>
+                <li className="nav__item">
+                  <Link to={`/${user.id}/pets`} type="button" className="btn__link my-pet">My Pets</Link>
+                </li>
+                <li className="nav__item">
+                  <Link to="/" type="button" className="btn__link btn-login">Logout</Link>
+                </li>
+              </>
             )}
           </ul>
         </nav>
