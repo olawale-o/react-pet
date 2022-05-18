@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { VscLocation } from 'react-icons/vsc';
-import { AiOutlineHeart, AiOutlineCamera } from 'react-icons/ai';
+import { AiOutlineHeart, AiOutlineCamera, AiFillHeart } from 'react-icons/ai';
 import { titlelize, GENDER_ENUM } from '../../helper';
 import BASE_URI from '../../constants';
 import './style.scss';
@@ -63,7 +63,9 @@ const ListingPetCard = ({ petId }) => {
           <span>$ 4000</span>
           <button type="button" className="interaction__btn" title="like" onClick={() => console.log('cliked')}>
             <span className="icon" title="like">
-              <AiOutlineHeart size={20} color="#E9547C" aria-label="like" title="like" />
+              {pet.liked_by_me
+                ? <AiFillHeart size={20} color="#E9547C" aria-label="like" title="like" />
+                : <AiOutlineHeart size={20} color="#E9547C" aria-label="like" title="like" />}
             </span>
           </button>
         </div>

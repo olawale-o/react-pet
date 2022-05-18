@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { AiOutlineHeart, AiOutlineEllipsis } from 'react-icons/ai';
+import { AiOutlineHeart, AiOutlineEllipsis, AiFillHeart } from 'react-icons/ai';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import PropType from 'prop-types';
 import { titlelize, GENDER_ENUM } from '../../helper';
@@ -65,9 +65,11 @@ const MyPetCard = ({
         <div className="interactions">
           <button type="button" className="interaction__btn" title="like">
             <span className="icon" title="like">
-              <AiOutlineHeart size={20} aria-label="like" title="like" />
+              {pet.liked_by_me
+                ? <AiFillHeart size={20} color="#E9547C" aria-label="like" title="like" />
+                : <AiOutlineHeart size={20} color="#E9547C" aria-label="like" title="like" />}
             </span>
-            <span className="count">5</span>
+            <span className="count">{pet.likes}</span>
           </button>
           <button type="button" className="interaction__btn">
             <span className="icon">
