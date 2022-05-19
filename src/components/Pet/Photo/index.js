@@ -9,6 +9,7 @@ const Photo = ({
   stateProps,
   setPhoto,
   close,
+  makeProfilePhoto,
 }) => {
   const photo = useSelector((state) => state.pet.photos[String(photoId)]);
   const actions = [
@@ -20,7 +21,7 @@ const Photo = ({
     {
       id: 2,
       text: 'Make profile photo',
-      func: () => {},
+      func: () => makeProfilePhoto(photo.url),
     },
   ];
   return (
@@ -60,6 +61,7 @@ Photo.propTypes = {
   photoId: PropType.number.isRequired,
   setPhoto: PropType.func.isRequired,
   close: PropType.func.isRequired,
+  makeProfilePhoto: PropType.func.isRequired,
   stateProps: PropType.shape({
     choosenPhoto: PropType.number,
     overlay: PropType.bool,
