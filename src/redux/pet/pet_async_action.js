@@ -7,6 +7,7 @@ import {
   selectedPet,
   setLoading,
   selectedPetPhotos,
+  setPhoto,
 } from '.';
 
 import { normalizeMyPets, normalizePhotos, normalizeAllPets } from '../../Schema/normalizers';
@@ -105,6 +106,21 @@ export const getPetPhotos = (service, credential) => (
       const images = normalizePhotos(photos);
       dispatch(selectedPetPhotos(images));
     } catch (e) {
+      dispatch(setError(e.response.data.error));
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const setProfilePhoto = (credential, service) => (
+  async function onSetProfilePhoto(dispatch) {
+    dispatch(setLoading(true));
+    try {
+      const { data: { dog } } = await service(credential);
+      setPhoto(dog);
+    } catch (e) {
+      console.log(e);
       dispatch(setError(e.response.data.error));
     } finally {
       dispatch(setLoading(false));

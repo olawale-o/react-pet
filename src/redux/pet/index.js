@@ -4,7 +4,8 @@ export const MYPETS = 'pet/pet/MYPETS';
 export const BREEDS = 'pet/pet/BREEDS';
 export const SELECTEDPET = 'pet/pet/PET';
 export const LOADING = 'pet/pet/LOADING';
-export const PETPHOTOS = 'pet/pet/photos';
+export const PETPHOTOS = 'pet/pet/PHOTOS';
+export const SET_PHOTO = 'pet/pet/PHOTO';
 
 const initialState = {
   loading: false,
@@ -52,6 +53,11 @@ export const setLoading = (payload) => ({
   payload,
 });
 
+export const setPhoto = (payload) => ({
+  type: SET_PHOTO,
+  payload,
+});
+
 const petReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case ALLPET:
@@ -80,6 +86,17 @@ const petReducer = (state = initialState, action = {}) => {
         ...state,
         photos: { ...state.photos, ...action.payload },
       };
+    case SET_PHOTO: {
+      const { dog } = action.payload;
+      const { myPets, allPets } = state;
+      myPets[dog.id].pic_url = dog.pic_url;
+      allPets[dog.id].pic_url = dog.pic_url;
+      return {
+        ...state,
+        myPets,
+        allPets,
+      };
+    }
     default:
       return state;
   }
