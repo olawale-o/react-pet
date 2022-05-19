@@ -6,8 +6,10 @@ import PropType from 'prop-types';
 import Photo from '../Photo';
 import { setProfilePhoto } from '../../../redux/pet/pet_async_action';
 import { setProfilePhotoService } from '../../../services';
+import { useNavigator } from '../../../helper';
 
 const PhotoList = ({ photos, setProfilePhoto }) => {
+  const { pushAndReplace } = useNavigator();
   const { petId } = useParams();
   const [state, setState] = React.useState({
     choosenPhoto: 0,
@@ -22,7 +24,7 @@ const PhotoList = ({ photos, setProfilePhoto }) => {
       fullOverlay: false,
       choosenPhoto: 0,
     }));
-    setProfilePhoto({ petId, photo: { url } }, setProfilePhotoService);
+    setProfilePhoto({ petId, photo: { url } }, setProfilePhotoService, pushAndReplace);
   };
 
   return (
@@ -55,7 +57,7 @@ const PhotoList = ({ photos, setProfilePhoto }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setProfilePhoto: (data, service) => dispatch(setProfilePhoto(data, service)),
+  setProfilePhoto: (data, service, cb) => dispatch(setProfilePhoto(data, service, cb)),
 });
 
 export default connect(null, mapDispatchToProps)(PhotoList);
