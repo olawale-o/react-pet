@@ -113,14 +113,14 @@ export const getPetPhotos = (service, credential) => (
   }
 );
 
-export const setProfilePhoto = (credential, service) => (
+export const setProfilePhoto = (credential, service, cb) => (
   async function onSetProfilePhoto(dispatch) {
     dispatch(setLoading(true));
     try {
       const { data: { dog } } = await service(credential);
       setPhoto(dog);
+      cb(-1);
     } catch (e) {
-      console.log(e);
       dispatch(setError(e.response.data.error));
     } finally {
       dispatch(setLoading(false));
