@@ -14,6 +14,10 @@ const PetListing = ({ petIds }) => {
         {petIds.map((petId) => (
           <ListingPetCard key={petId} petId={petId} />
         ))}
+        <div className="pagination">
+          <button type="button" title="prev" onClick={() => {}} className="button pagination__button prev">Previous</button>
+          <button type="button" title="next" onClick={() => {}} className="button pagination__button next">Next</button>
+        </div>
       </div>
     </div>
   );

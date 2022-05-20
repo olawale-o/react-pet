@@ -8,7 +8,7 @@
     position: fixed;
     top: 8rem;
     background: #a11435;
-    width: 280px;
+    // width: 280px;
     height: 100%;
     z-index: 1;
     padding: 0 2rem 4rem;
@@ -151,6 +151,7 @@
 @media screen and (min-width: 1200px) {
   .search__panel {
     width: 300px;
-    left: 10rem;
+    // left: 10rem;
+    background: palevioletred;
   }
 }

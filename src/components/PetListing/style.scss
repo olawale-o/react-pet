@@ -1,3 +1,15 @@
+.listings{
+  .listing__pet {
+    .pagination {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      .pagination__button {
+        background: #fff;
+      }
+    }
+  }
+}
 @media screen and (min-width: 768px) {
   .listings{
     width: auto;
@@ -5,15 +17,22 @@
     display: flex;
     flex-direction: column;
     padding-top: 8rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    .listing__pet {
+      .pagination {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        .pagination__button {
+          background: #fff;
+        }
+      }
+    }
   }
 }
 
 @media screen and (min-width: 1200px) {
   .listings {
     margin-left: 300px;
-    padding-left: 4rem;
   }
 }
 
