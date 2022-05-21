@@ -6,6 +6,7 @@ export const SELECTEDPET = 'pet/pet/PET';
 export const LOADING = 'pet/pet/LOADING';
 export const PETPHOTOS = 'pet/pet/PHOTOS';
 export const SET_PHOTO = 'pet/pet/PHOTO';
+export const SET_PET_META = 'pet/pet/SET_PET_META';
 
 const initialState = {
   loading: false,
@@ -16,6 +17,7 @@ const initialState = {
   photos: [],
   petIds: [],
   myPetIds: [],
+  searchMeta: {},
 };
 
 export const addPet = (payload) => ({
@@ -58,11 +60,17 @@ export const setPhoto = (payload) => ({
   payload,
 });
 
+export const setPETMETA = (payload) => ({
+  type: SET_PET_META,
+  payload,
+});
+
 const petReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case ALLPET:
       return {
         ...state,
+        searchMeta: action.payload.meta,
         allPets: action.payload.pets,
         petIds: action.payload.petIds,
       };

@@ -27,13 +27,13 @@ export const createPet = (data, service, push, userId) => (
   }
 );
 
-export const getAllPets = (service) => (
+export const getAllPets = (service, credential) => (
   async function onAllPets(dispatch) {
     dispatch(setLoading(true));
     try {
-      const { data: { dogs } } = await service();
+      const { data: { dogs, result_metadata: meta } } = await service(credential);
       const { pets, petIds } = normalizeAllPets(dogs);
-      dispatch(allPets({ pets, petIds }));
+      dispatch(allPets({ pets, petIds, meta }));
     } catch (e) {
       dispatch(setError(e.response.data.error));
     } finally {
