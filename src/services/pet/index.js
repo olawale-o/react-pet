@@ -6,8 +6,9 @@ export const createDogService = async (credentials, userId) => {
   return response.data;
 };
 
-export const allDogService = async () => {
-  const response = await get(`${BASE_URI}/v1/dogs`);
+export const allDogService = async (credential) => {
+  const { page } = credential;
+  const response = await get(`${BASE_URI}/v1/dogs/${page}`);
   return response.data;
 };
 
