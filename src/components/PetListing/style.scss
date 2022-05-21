@@ -10,6 +10,7 @@
     }
   }
 }
+
 @media screen and (min-width: 768px) {
   .listings{
     width: auto;
@@ -20,10 +21,19 @@
     .listing__pet {
       .pagination {
         width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        .pagination__button {
-          background: #fff;
+        .pagination__buttons {
+          width: 100%;
+          max-width: 72rem;
+          margin-left: auto;
+          margin-right: auto;
+          display: flex;
+          justify-content: flex-end;
+          .pagination__button {
+            background: #fff;
+            &.next {
+              margin-left: 1rem;
+            }
+          }
         }
       }
     }
