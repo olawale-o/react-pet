@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import HomeContext from '../../context/HomeContext';
 import Listings from '../Listings';
 import './Home.scss';
 import { allDogService } from '../../services';
@@ -18,18 +19,21 @@ const Home = ({ petIds, fetchPets, searchMeta }) => {
   }, []);
   if (!petIds) return null;
   return (
-    <div className="home">
-      <div className="content">
-        <div className="main">
-          <Listings
-            petIds={petIds}
-            prevPage={prevPage}
-            nextPage={nextPage}
-            paginate={paginate}
-          />
+    <HomeContext.Provider value={{
+      prevPage,
+      nextPage,
+      paginate,
+      petIds,
+    }}
+    >
+      <div className="home">
+        <div className="content">
+          <div className="main">
+            <Listings />
+          </div>
         </div>
       </div>
-    </div>
+    </HomeContext.Provider>
   );
 };
 
