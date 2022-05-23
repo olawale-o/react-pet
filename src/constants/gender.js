@@ -1,15 +1,15 @@
 const genders = [
   {
     name: 'Male',
-    value: 'male',
+    value: 'm',
   },
   {
     name: 'Female',
-    value: 'female',
+    value: 'f',
   },
   {
     name: 'Both',
-    value: 'both',
+    value: 'b',
   },
 ];
 
