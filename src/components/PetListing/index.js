@@ -5,12 +5,12 @@ import Filter from '../Filter';
 import './style.scss';
 
 const PetListing = () => {
-  console.log('petlisting');
+  console.log('PetListing');
   return (
     <HomeContext.Consumer>
       {({
-        prevPage,
-        nextPage,
+        prevPageNo,
+        nextPageNo,
         paginate,
         petIds,
       }) => (
@@ -25,18 +25,18 @@ const PetListing = () => {
                 <button
                   type="button"
                   title="prev"
-                  onClick={() => paginate(prevPage)}
+                  onClick={() => paginate(prevPageNo, 'prev')}
                   className="button pagination__button prev"
-                  disabled={prevPage === null || prevPage === undefined}
+                  disabled={prevPageNo === null || prevPageNo === undefined || prevPageNo === 0}
                 >
                   Previous
                 </button>
                 <button
                   type="button"
                   title="next"
-                  onClick={() => paginate(nextPage)}
+                  onClick={() => paginate(nextPageNo, 'next')}
                   className="button pagination__button next"
-                  disabled={nextPage === null || nextPage === undefined}
+                  disabled={nextPageNo === null || nextPageNo === undefined || nextPageNo === 0}
                 >
                   Next
                 </button>
