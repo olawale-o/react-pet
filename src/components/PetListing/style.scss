@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables';
+
 .listings{
   .listing__pet {
     .pagination {
@@ -5,7 +7,15 @@
       display: flex;
       justify-content: flex-end;
       .pagination__button {
-        background: #fff;
+        font-weight: $fw-bolder;
+        &.prev {
+          background: #fff;
+          color: $primary-color;
+        }
+        &.next {
+          background: $primary-color;
+          color: #fff;
+        }
       }
     }
   }
@@ -29,7 +39,6 @@
           display: flex;
           justify-content: flex-end;
           .pagination__button {
-            background: #fff;
             &.next {
               margin-left: 1rem;
             }
