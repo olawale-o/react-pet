@@ -1,29 +1,13 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import HomeContext from '../../context/HomeContext';
 import './style.scss';
-import { petColors, genders, breedTypes } from '../../constants';
+import { petColors, breedTypes } from '../../constants';
 
-const SideSearchPanel = () => {
-  const [search, setSearch] = useSearchParams();
+const SideSearchPanel = ({ setPawColor, onColorSelected }) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [pawColors, setPawColors] = React.useState(petColors);
-  const [pawColor, setPawColor] = React.useState('all');
   const searchInputRef = React.useRef();
-  const [gender, setGender] = React.useState('both');
-  const [breed, setBreed] = React.useState('both');
-
-  const onGenderSelected = (e) => {
-    const { target: { value } } = e;
-    setGender(value);
-    setSearch({ gender: value, breeder: breed, color: pawColor });
-    console.log(search);
-  };
-
-  const onBreedSelected = (e) => {
-    const { target: { value } } = e;
-    setBreed(value);
-    setSearch({ gender, breeder: value, color: pawColor });
-  };
 
   const onSearchInputActive = () => {
     setIsVisible(true);
@@ -49,7 +33,7 @@ const SideSearchPanel = () => {
         onClick={() => {
           setPawColor(name);
           setIsVisible(false);
-          setSearch({ gender, breeder: breed, color: name });
+          onColorSelected(name);
         }}
       >
         {name}
@@ -58,7 +42,6 @@ const SideSearchPanel = () => {
   ));
 
   React.useEffect(() => {
-    setSearch({ gender: 'both', breeder: 'both', color: 'all' });
     const onOutSideClick = (event) => {
       if (searchInputRef.current && !searchInputRef.current.contains(event.target)) {
         setIsVisible(false);
@@ -69,64 +52,80 @@ const SideSearchPanel = () => {
   }, []);
 
   return (
-    <div className="search__panel">
-      <div className="container">
-        <div className="panel__card">
-          <h6 className="title">Gender</h6>
-          <ul className="list">
-            {genders.map(({ name, value }) => (
-              <li className="item" key={value}>
+    <HomeContext.Consumer>
+      {({
+        genders,
+        gender,
+        onGenderSelected,
+        breed,
+        onBreedSelected,
+        pawColor,
+      }) => (
+        <div className="search__panel">
+          <div className="container">
+            <div className="panel__card">
+              <h6 className="title">Gender</h6>
+              <ul className="list">
+                {genders.map(({ name, value }) => (
+                  <li className="item" key={value}>
+                    <input
+                      type="radio"
+                      id={value}
+                      className="checkbox"
+                      name="gender"
+                      value={value}
+                      onChange={onGenderSelected}
+                      checked={gender === value}
+                    />
+                    <label htmlFor={value}>{name}</label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="panel__card">
+              <h6 className="title">Category</h6>
+              <ul className="list">
+                {breedTypes.map(({ name, value }) => (
+                  <li className="item" key={value}>
+                    <input
+                      type="radio"
+                      id={value}
+                      value={value}
+                      name="breed"
+                      className="checkbox"
+                      onChange={onBreedSelected}
+                      checked={breed === value}
+                    />
+                    <label htmlFor={value}>{name}</label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="panel__card">
+              <h6 className="title">Color</h6>
+              <div ref={searchInputRef} className={`search__input ${isVisible ? 'active' : ''}`}>
                 <input
-                  type="radio"
-                  id={value}
-                  className="checkbox"
-                  name="gender"
-                  value={value}
-                  onChange={onGenderSelected}
-                  checked={gender === value}
+                  type="text"
+                  name="color"
+                  placeholder="Color"
+                  onFocus={onSearchInputActive}
+                  onChange={(e) => onSearch(e.target.value)}
+                  value={pawColor}
+                  autoComplete="off"
                 />
-                <label htmlFor={value}>{name}</label>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="panel__card">
-          <h6 className="title">Category</h6>
-          <ul className="list">
-            {breedTypes.map(({ name, value }) => (
-              <li className="item" key={value}>
-                <input
-                  type="radio"
-                  id={value}
-                  value={value}
-                  name="breed"
-                  className="checkbox"
-                  onChange={onBreedSelected}
-                  checked={breed === value}
-                />
-                <label htmlFor={value}>{name}</label>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="panel__card">
-          <h6 className="title">Color</h6>
-          <div ref={searchInputRef} className={`search__input ${isVisible ? 'active' : ''}`}>
-            <input
-              type="text"
-              name="color"
-              placeholder="Color"
-              onFocus={onSearchInputActive}
-              onChange={(e) => onSearch(e.target.value)}
-              value={pawColor}
-              autoComplete="off"
-            />
-            <ul className="match__box">{colors}</ul>
+                <ul className="match__box">{colors}</ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </HomeContext.Consumer>
   );
 };
 
 export default SideSearchPanel;
+
+SideSearchPanel.propTypes = {
+  setPawColor: PropTypes.func.isRequired,
+  onColorSelected: PropTypes.func.isRequired,
+};
