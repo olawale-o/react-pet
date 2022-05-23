@@ -63,6 +63,7 @@ const Home = ({ petIds, fetchPets, searchMeta }) => {
     fetchPets(allDogService,
       {
         page: currentPage,
+        gender: 'b',
         breeder: 'b',
         color: 'all',
         direction: 'next',
