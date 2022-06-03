@@ -32,6 +32,21 @@ const Login = ({
     await onLogin({ email, password });
   };
 
+  const formFields = [
+    {
+      key: 'email',
+      name: email.name,
+      type: 'email',
+      placeholder: 'Email',
+    },
+    {
+      key: 'password',
+      name: password.name,
+      type: 'password',
+      placeholder: 'Password',
+    },
+  ];
+
   return (
     <Formik
       validationSchema={loginSchema}
@@ -57,12 +72,15 @@ const Login = ({
                   <li className="error">{error}</li>
                 </ul>
               )}
-            <div className="field">
-              <CustomInput type="email" name={email.name} placeholder="Email" />
-            </div>
-            <div className="field">
-              <CustomInput type="password" name={password.name} placeholder="Password" />
-            </div>
+            {formFields.map((field) => (
+              <div className="field" key={field.key}>
+                <CustomInput
+                  type={field.type}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                />
+              </div>
+            ))}
             <button
               type="submit"
               className="button button-primary"
