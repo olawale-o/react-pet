@@ -10,7 +10,7 @@ export const authenticate = (data, service, push) => (
       dispatch(setToken(token));
       push(`/${user.id}/pets`);
     } catch (e) {
-      dispatch(setError(e.response.data.error));
+      dispatch(setError(e.response.data.errors || e.response.data.error));
     } finally {
       dispatch(setLoading());
     }
