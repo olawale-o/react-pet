@@ -42,6 +42,18 @@ li {
   list-style: none;
 }
 
+.errors {
+  text-align: left;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: red;
+  font-size: 1.2rem;
+  font-weight: $fw-bolder;
+}
+
 .bookmark {
   background: transparent;
   padding: 0.5rem;
