@@ -2,8 +2,8 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import {
-  authInitialValues,
   authSchema,
+  authInitialValues,
   authModel,
   CustomInput,
 } from '../forms';
