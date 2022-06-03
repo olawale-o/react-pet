@@ -6,12 +6,14 @@ import SignUp from '../../components/SignUp';
 import { authenticate } from '../../redux/auth/auth_async_action';
 import { loginService, registerService } from '../../services';
 import { useNavigator } from '../../helper';
+import { setError } from '../../redux/global';
 
-const Auth = ({ onSubmit }) => {
+const Auth = ({ error, onSubmit, clearError }) => {
   const { pushAndReplace } = useNavigator(true);
   const [isFocus, setIsFocus] = React.useState(true);
   const onActive = () => {
     setIsFocus(!isFocus);
+    clearError();
   };
 
   const onLogin = async ({ email, password }) => {
@@ -32,7 +34,13 @@ const Auth = ({ onSubmit }) => {
     <div className="auth-container">
       <div className="container">
         <div className={`form-container ${isFocus ? 'slide' : ''}`}>
-          <Login onActive={onActive} isFocus={isFocus} onLogin={onLogin} />
+          <Login
+            onActive={onActive}
+            isFocus={isFocus}
+            onLogin={onLogin}
+            error={error}
+            clearError={clearError}
+          />
           <SignUp onActive={onActive} isFocus={isFocus} onRegister={onRegister} />
         </div>
         <div className="overlay-container" />
@@ -41,12 +49,23 @@ const Auth = ({ onSubmit }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (data, service, push) => dispatch(authenticate(data, service, push)),
+const mapStatetoProps = (state) => ({
+  error: state.global.error,
 });
 
-export default connect(null, mapDispatchToProps)(Auth);
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (data, service, push) => dispatch(authenticate(data, service, push)),
+  clearError: () => dispatch(setError('')),
+});
+
+export default connect(mapStatetoProps, mapDispatchToProps)(Auth);
+
+Auth.defaultProps = {
+  error: '',
+};
 
 Auth.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  clearError: PropTypes.func.isRequired,
 };

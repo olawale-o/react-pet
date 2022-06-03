@@ -13,12 +13,19 @@ const { loginInitialValues } = authInitialValues;
 const { loginSchema } = authSchema;
 const { login: { formField: { email, password } } } = authModel;
 
-const Login = ({ onActive, isFocus, onLogin }) => {
+const Login = ({
+  onActive,
+  isFocus,
+  onLogin,
+  error,
+  clearError,
+}) => {
   const onReset = (resetForm) => {
     if (!isFocus) {
       resetForm();
     }
     onActive();
+    clearError();
   };
 
   const auth = async ({ email, password }) => {
@@ -27,8 +34,8 @@ const Login = ({ onActive, isFocus, onLogin }) => {
 
   return (
     <Formik
-      initialValues={loginInitialValues}
       validationSchema={loginSchema}
+      initialValues={loginInitialValues}
       onSubmit={auth}
     >
       {({
@@ -44,6 +51,9 @@ const Login = ({ onActive, isFocus, onLogin }) => {
               isFocus={isFocus}
               onReset={() => onReset(handleReset)}
             />
+            <ul className="errors">
+              <li className="error">{error}</li>
+            </ul>
             <div className="field">
               <CustomInput type="email" name={email.name} placeholder="Email" />
             </div>
@@ -66,8 +76,14 @@ const Login = ({ onActive, isFocus, onLogin }) => {
 
 export default Login;
 
+Login.defaultProps = {
+  error: '',
+};
+
 Login.propTypes = {
   onActive: PropTypes.func.isRequired,
   isFocus: PropTypes.bool.isRequired,
   onLogin: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  clearError: PropTypes.func.isRequired,
 };
