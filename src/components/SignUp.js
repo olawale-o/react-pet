@@ -25,11 +25,33 @@ const SignUp = ({
       resetForm();
     }
     onActive();
+    clearError();
   };
 
   const auth = async ({ username, email, password }) => {
     await onRegister({ username, email, password });
   };
+
+  const formFields = [
+    {
+      key: 'username',
+      name: username.name,
+      type: 'username',
+      placeholder: 'Username',
+    },
+    {
+      key: 'email',
+      name: registerEmail.name,
+      type: 'email',
+      placeholder: 'Email',
+    },
+    {
+      key: 'password',
+      name: registerPassword.name,
+      type: 'password',
+      placeholder: 'Password',
+    },
+  ];
   return (
     <Formik
       validationSchema={registerSchema}
@@ -49,45 +71,35 @@ const SignUp = ({
               isFocus={isFocus}
               onReset={() => onReset(handleReset)}
             />
-            <div className="field">
-              <CustomInput type="text" name={username.name} placeholder="Username" />
-              {error && (typeof error === 'object')
-                && (
+            {formFields.map((field) => (
+              <div className="field" key={field.key}>
+                <CustomInput
+                  type={field.type}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                />
+                {error && (typeof error === 'object')
+                  && (
                   <ul className="errors">
                     {'username' in error && (
                       error.username.map((e) => (
                         <li className="error" key={e}>{e}</li>
                       ))
                     )}
-                  </ul>
-                )}
-            </div>
-            <div className="field">
-              <CustomInput type="email" name={registerEmail.name} placeholder="Email" />
-              {error && (typeof error === 'object')
-                && (
-                  <ul className="errors">
-                    {'email' in error && (
+                    {'email' in error && field.key === 'email' && (
                       error.email.map((e) => (
                         <li className="error" key={e}>{`Email ${e}`}</li>
                       ))
                     )}
-                  </ul>
-                )}
-            </div>
-            <div className="field">
-              <CustomInput type="password" name={registerPassword.name} placeholder="Password" />
-              {error && (typeof error === 'object')
-                && (
-                  <ul className="errors">
-                    {'password' in error && (
+                    {'password' in error && field.key === 'password' && (
                       error.password.map((e) => (
                         <li className="error" key={e}>{`Password ${e}`}</li>
                       ))
                     )}
                   </ul>
-                )}
-            </div>
+                  )}
+              </div>
+            ))}
             <button
               type="submit"
               className="button button-primary"
