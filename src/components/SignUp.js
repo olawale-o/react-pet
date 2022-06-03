@@ -2,8 +2,8 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 import {
-  authInitialValues,
   authSchema,
+  authInitialValues,
   CustomInput,
   authModel,
 } from '../forms';
@@ -13,7 +13,13 @@ const { registerInitialValues } = authInitialValues;
 const { registerSchema } = authSchema;
 const { register: { formField: { username, registerEmail, registerPassword } } } = authModel;
 
-const SignUp = ({ onActive, isFocus, onRegister }) => {
+const SignUp = ({
+  onActive,
+  isFocus,
+  onRegister,
+  error,
+  clearError,
+}) => {
   const onReset = (resetForm) => {
     if (isFocus) {
       resetForm();
@@ -26,15 +32,15 @@ const SignUp = ({ onActive, isFocus, onRegister }) => {
   };
   return (
     <Formik
-      initialValues={registerInitialValues}
       validationSchema={registerSchema}
+      initialValues={registerInitialValues}
       onSubmit={auth}
     >
       {({
         handleReset,
         isSubmitting,
-        isValid,
         dirty,
+        isValid,
       }) => (
         <div className="signup-container">
           <Form>
@@ -45,12 +51,42 @@ const SignUp = ({ onActive, isFocus, onRegister }) => {
             />
             <div className="field">
               <CustomInput type="text" name={username.name} placeholder="Username" />
+              {error && (typeof error === 'object')
+                && (
+                  <ul className="errors">
+                    {'username' in error && (
+                      error.username.map((e) => (
+                        <li className="error" key={e}>{e}</li>
+                      ))
+                    )}
+                  </ul>
+                )}
             </div>
             <div className="field">
               <CustomInput type="email" name={registerEmail.name} placeholder="Email" />
+              {error && (typeof error === 'object')
+                && (
+                  <ul className="errors">
+                    {'email' in error && (
+                      error.email.map((e) => (
+                        <li className="error" key={e}>{`Email ${e}`}</li>
+                      ))
+                    )}
+                  </ul>
+                )}
             </div>
             <div className="field">
               <CustomInput type="password" name={registerPassword.name} placeholder="Password" />
+              {error && (typeof error === 'object')
+                && (
+                  <ul className="errors">
+                    {'password' in error && (
+                      error.password.map((e) => (
+                        <li className="error" key={e}>{`Password ${e}`}</li>
+                      ))
+                    )}
+                  </ul>
+                )}
             </div>
             <button
               type="submit"
@@ -68,8 +104,17 @@ const SignUp = ({ onActive, isFocus, onRegister }) => {
 
 export default SignUp;
 
+SignUp.defaultProps = {
+  error: '' || {},
+};
+
 SignUp.propTypes = {
   onActive: PropTypes.func.isRequired,
   isFocus: PropTypes.bool.isRequired,
   onRegister: PropTypes.func.isRequired,
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({}),
+  ]),
+  clearError: PropTypes.func.isRequired,
 };

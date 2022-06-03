@@ -41,8 +41,8 @@ const Login = ({
       {({
         handleReset,
         isSubmitting,
-        isValid,
         dirty,
+        isValid,
       }) => (
         <div className="login-container">
           <Form>
@@ -51,9 +51,12 @@ const Login = ({
               isFocus={isFocus}
               onReset={() => onReset(handleReset)}
             />
-            <ul className="errors">
-              <li className="error">{error}</li>
-            </ul>
+            {error && (typeof error !== 'object')
+              && (
+                <ul className="errors">
+                  <li className="error">{error}</li>
+                </ul>
+              )}
             <div className="field">
               <CustomInput type="email" name={email.name} placeholder="Email" />
             </div>
@@ -77,13 +80,16 @@ const Login = ({
 export default Login;
 
 Login.defaultProps = {
-  error: '',
+  error: '' || {},
 };
 
 Login.propTypes = {
   onActive: PropTypes.func.isRequired,
   isFocus: PropTypes.bool.isRequired,
   onLogin: PropTypes.func.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({}),
+  ]),
   clearError: PropTypes.func.isRequired,
 };

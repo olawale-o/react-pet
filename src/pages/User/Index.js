@@ -41,7 +41,13 @@ const Auth = ({ error, onSubmit, clearError }) => {
             error={error}
             clearError={clearError}
           />
-          <SignUp onActive={onActive} isFocus={isFocus} onRegister={onRegister} />
+          <SignUp
+            onActive={onActive}
+            isFocus={isFocus}
+            onRegister={onRegister}
+            error={error}
+            clearError={clearError}
+          />
         </div>
         <div className="overlay-container" />
       </div>
@@ -61,11 +67,14 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStatetoProps, mapDispatchToProps)(Auth);
 
 Auth.defaultProps = {
-  error: '',
+  error: '' || {},
 };
 
 Auth.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({}),
+  ]),
   clearError: PropTypes.func.isRequired,
 };
