@@ -36,7 +36,7 @@ const SignUp = ({
     {
       key: 'username',
       name: username.name,
-      type: 'username',
+      type: 'text',
       placeholder: 'Username',
     },
     {
