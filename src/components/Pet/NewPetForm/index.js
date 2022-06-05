@@ -9,13 +9,14 @@ import PetForm from '../PetForm';
 import PetUploadForm from './PetUploadForm';
 import { createDogService } from '../../../services';
 import { useNavigator } from '../../../helper';
+import { setError } from '../../../redux/global';
 
 const { formField } = newPetModel;
 
-const renderForm = (step, setFieldValue) => {
+const renderForm = (step, setFieldValue, error) => {
   switch (step) {
     case 0:
-      return <PetForm formField={formField} />;
+      return <PetForm formField={formField} error={error} />;
     case 1:
       return <PetUploadForm formField={formField} setFieldValue={setFieldValue} />;
     default:
@@ -23,7 +24,13 @@ const renderForm = (step, setFieldValue) => {
   }
 };
 
-const NewPetForm = ({ onSubmit, userId, breeds }) => {
+const NewPetForm = ({
+  onSubmit,
+  userId,
+  breeds,
+  error,
+  clearError,
+}) => {
   const { pushAndReplace } = useNavigator(true);
   const [activeStep, setActiveStep] = React.useState(0);
   const currentValidationSchema = newPetSchema[activeStep];
@@ -49,6 +56,7 @@ const NewPetForm = ({ onSubmit, userId, breeds }) => {
     if (isLastStep) {
       await onSubmit(formData, createDogService, pushAndReplace, userId);
     } else {
+      clearError();
       actions.setSubmitting(false);
       actions.setTouched({});
       setActiveStep(activeStep + 1);
@@ -64,7 +72,7 @@ const NewPetForm = ({ onSubmit, userId, breeds }) => {
       >
         {({ setFieldValue }) => (
           <Form>
-            {renderForm(activeStep, setFieldValue)}
+            {renderForm(activeStep, setFieldValue, error)}
             <div className="actions">
               {activeStep !== 0 && (
                 <button
@@ -89,11 +97,17 @@ const NewPetForm = ({ onSubmit, userId, breeds }) => {
 const mapStateToProps = (state) => ({
   userId: state.auth.user.id,
   breeds: state.pet.breeds,
+  error: state.global.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (data, service, push, userId) => dispatch(createPet(data, service, push, userId)),
+  clearError: () => dispatch(setError('')),
 });
+
+NewPetForm.defaultProps = {
+  error: '' || {},
+};
 
 NewPetForm.propTypes = {
   onSubmit: PropType.func.isRequired,
@@ -102,6 +116,11 @@ NewPetForm.propTypes = {
     id: PropType.number.isRequired,
     name: PropType.string.isRequired,
   })).isRequired,
+  error: PropType.oneOfType([
+    PropType.string,
+    PropType.shape({}),
+  ]),
+  clearError: PropType.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewPetForm);
