@@ -13,10 +13,10 @@ import { setError } from '../../../redux/global';
 
 const { formField } = newPetModel;
 
-const renderForm = (step, setFieldValue, error) => {
+const renderForm = (step, setFieldValue) => {
   switch (step) {
     case 0:
-      return <PetForm formField={formField} error={error} />;
+      return <PetForm formField={formField} />;
     case 1:
       return <PetUploadForm formField={formField} setFieldValue={setFieldValue} />;
     default:
@@ -54,9 +54,9 @@ const NewPetForm = ({
     formData.append('dog[description]', petDescription);
     petImages.forEach((file) => formData.append('dog[images][]', file));
     if (isLastStep) {
+      clearError();
       await onSubmit(formData, createDogService, pushAndReplace, userId);
     } else {
-      clearError();
       actions.setSubmitting(false);
       actions.setTouched({});
       setActiveStep(activeStep + 1);
@@ -66,13 +66,19 @@ const NewPetForm = ({
   return (
     <div className="pet__form">
       <Formik
-        initialValues={newPetInitialValues}
         validationSchema={currentValidationSchema}
+        initialValues={newPetInitialValues}
         onSubmit={handleSubmit}
       >
         {({ setFieldValue }) => (
           <Form>
-            {renderForm(activeStep, setFieldValue, error)}
+            <ul className="errors">
+              {error
+                && Object.values(error).map((err) => (
+                  <li className="error" key={err}>{err}</li>
+                ))}
+            </ul>
+            {renderForm(activeStep, setFieldValue)}
             <div className="actions">
               {activeStep !== 0 && (
                 <button

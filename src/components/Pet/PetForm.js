@@ -12,7 +12,7 @@ import petColors from '../../constants/pet_colors';
 import petSelector from '../../redux/pet/pet_selector';
 import usePopUp from '../../composables';
 
-const PetForm = ({ formField, error }) => {
+const PetForm = ({ formField }) => {
   const { breeds } = useSelector(petSelector);
   const rangeValueElement = React.useRef();
   const [pawColors, setPawColors] = React.useState(petColors);
@@ -67,15 +67,6 @@ const PetForm = ({ formField, error }) => {
     <div>
       <div className="field">
         <CustomInput type="text" name={petName.name} placeholder="Pet name" />
-        {error && (
-          <ul className="errors">
-            {'name' in error && (
-              error.name.map((e) => (
-                <li className="error" key={e}>{e}</li>
-              ))
-            )}
-          </ul>
-        )}
       </div>
       <div className="field">
         <span className="label">Weight</span>
@@ -86,15 +77,6 @@ const PetForm = ({ formField, error }) => {
           onSliderMove={onSliderMove}
           el={rangeValueElement}
         />
-        {error && (
-          <ul className="errors">
-            {'weight' in error && (
-              error.weight.map((e) => (
-                <li className="error" key={e}>{e}</li>
-              ))
-            )}
-          </ul>
-        )}
       </div>
       <div className="field">
         <CustomAutoSuggest
@@ -107,15 +89,6 @@ const PetForm = ({ formField, error }) => {
           onFocus={() => petColorPopUp.setIsVisible(true)}
           isVisible={petColorPopUp.isVisible}
         />
-        {error && (
-          <ul className="errors">
-            {'color' in error && (
-              error.color.map((e) => (
-                <li className="error" key={e}>{e}</li>
-              ))
-            )}
-          </ul>
-        )}
       </div>
       <div className="field">
         <CustomAutoSuggest
@@ -128,15 +101,6 @@ const PetForm = ({ formField, error }) => {
           onFocus={() => petBreedPopUp.setIsVisible(true)}
           isVisible={petBreedPopUp.isVisible}
         />
-        {error && (
-          <ul className="errors">
-            {'breed' in error && (
-              error.breed.map((e) => (
-                <li className="error" key={e}>{e}</li>
-              ))
-            )}
-          </ul>
-        )}
       </div>
       <div className="field">
         <span className="label">Gender</span>
@@ -153,27 +117,9 @@ const PetForm = ({ formField, error }) => {
             },
           ]}
         />
-        {error && (
-          <ul className="errors">
-            {'gender' in error && (
-              error.gender.map((e) => (
-                <li className="error" key={e}>{e}</li>
-              ))
-            )}
-          </ul>
-        )}
       </div>
       <div className="field">
         <CustomTextArea name={petDescription.name} placeholder="Description" />
-        {error && (
-          <ul className="errors">
-            {'description' in error && (
-              error.description.map((e) => (
-                <li className="error" key={e}>{e}</li>
-              ))
-            )}
-          </ul>
-        )}
       </div>
     </div>
   );
@@ -183,7 +129,6 @@ export default PetForm;
 
 PetForm.defaultProps = {
   errors: {},
-  error: '' || {},
 };
 
 PetForm.propTypes = {
@@ -208,8 +153,4 @@ PetForm.propTypes = {
     }).isRequired,
   }).isRequired,
   errors: PropType.shape({}),
-  error: PropType.oneOfType([
-    PropType.string,
-    PropType.shape({}),
-  ]),
 };
