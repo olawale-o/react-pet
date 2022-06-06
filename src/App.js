@@ -1,6 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from 'react-router-dom';
 import Home from './pages/User/Home';
 import Auth from './pages/User/Index';
 import Profile from './pages/Profile';
@@ -13,9 +18,15 @@ import Photos from './pages/Pet/Photos';
 import PetDetail from './pages/Pet/Detail';
 import AuthContext from './context/AuthContext';
 import authSelector from './redux/auth/auth_selector';
+import { setError } from './redux/global';
 
 const App = () => {
   const { user } = useSelector(authSelector);
+  const location = useLocation();
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(setError(null));
+  }, [location]);
   return (
     <div className="App">
       <AuthContext.Provider value={{
