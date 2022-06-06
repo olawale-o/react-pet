@@ -20,7 +20,8 @@ export const createPet = (data, service, push, userId) => (
       dispatch(addPet(dog));
       push(`/${dog.owner_id}/pets`);
     } catch (e) {
-      dispatch(setError(e.response.data));
+      const { response: { data } } = e;
+      dispatch(setError(data));
     } finally {
       dispatch(setLoading(false));
     }
